@@ -8,6 +8,7 @@ imports:
     - { resource: "@MKUserBundle/Resources/config/services.yml" }
     - { resource: "@MKMailBundle/Resources/config/services.yml" }
     - { resource: config_rabbit.yml }
+    - { resource: parameters_app.yml }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
@@ -96,8 +97,4 @@ knp_paginator:
 monolog:
     channels: ["cron", "elastica", "services"]
 
-parameters:
-    user_role: CUSTOMER
-    user_roles: [CUSTOMER, ADMIN]
-    base_domain: http://todoapp/app_dev.php
 
