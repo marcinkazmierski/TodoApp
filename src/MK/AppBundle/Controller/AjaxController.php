@@ -94,14 +94,21 @@ class AjaxController extends Controller
                 'status' => 0,
             );
         } else {
-            $em = $this->getDoctrine()->getManager();
-            $em->remove($category);
-            $em->flush();
+            if (count($category->getTasks()) > 0) {
+                $response = array(
+                    'message' => $this->get('translator')->trans('ajax.category_delete_have_tasks'),
+                    'status' => 0,
+                );
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($category);
+                $em->flush();
 
-            $response = array(
-                'message' => $this->get('translator')->trans('ajax.category_delete_done'),
-                'status' => 1,
-            );
+                $response = array(
+                    'message' => $this->get('translator')->trans('ajax.category_delete_done'),
+                    'status' => 1,
+                );
+            }
         }
         return new JsonResponse($response, Response::HTTP_OK);
     }

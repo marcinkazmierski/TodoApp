@@ -30,6 +30,8 @@ jQuery(function () {
             if (data.status == 1) {
                 // data.message -> TODO
                 jQuery(parent).fadeOut(500);
+            } else if (data.status == 0 && typeof data.message !== 'undefined') {
+                alert(data.message);
             }
         });
     });
