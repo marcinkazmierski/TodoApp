@@ -22,6 +22,52 @@ class TaskRepository extends EntityRepository
         return $results;
     }
 
+    public function getAllTodayDone(User $user)
+    {
+        $doneDateStart = new \DateTime();
+        $doneDateStart->setTime(0, 0);
+        $doneDateEnd = new \DateTime();
+        $doneDateEnd->setTime(23, 59);
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder->select('t')
+            ->from('MKAppBundle:Task', 't')
+            ->where('t.status = :status')
+            ->andWhere('t.user = :user')
+            ->andWhere('t.doneDate > :doneDateStart')
+            ->andWhere('t.doneDate < :doneDateEnd')
+            ->orderBy('t.deadline', 'ASC')
+            ->setParameter('user', $user)
+            ->setParameter('doneDateStart', $doneDateStart)
+            ->setParameter('doneDateEnd', $doneDateEnd)
+            ->setParameter('status', 2);
+        $results = $queryBuilder->getQuery()->getResult(); // HYDRATE_ARRAY -> as array results
+        return $results;
+    }
+
+    public function getAllTodayTodo(User $user)
+    {
+        $deadlineDateStart = new \DateTime();
+        $deadlineDateStart->setTime(0, 0);
+        $deadlineDateEnd = new \DateTime();
+        $deadlineDateEnd->setTime(23, 59);
+
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder->select('t')
+            ->from('MKAppBundle:Task', 't')
+            ->where('t.status = :status')
+            ->andWhere('t.user = :user')
+            ->andWhere('t.deadline > :deadlineDateStart')
+            ->andWhere('t.deadline < :deadlineDateEnd')
+            ->orderBy('t.deadline', 'ASC')
+            ->setParameter('user', $user)
+            ->setParameter('deadlineDateStart', $deadlineDateStart)
+            ->setParameter('deadlineDateEnd', $deadlineDateEnd)
+            ->setParameter('status', 1);
+        $results = $queryBuilder->getQuery()->getResult(); // HYDRATE_ARRAY -> as array results
+        return $results;
+    }
+
     public function queryAllFromCategory(User $user, CategoryTask $category)
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();

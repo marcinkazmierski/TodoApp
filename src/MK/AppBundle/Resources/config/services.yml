@@ -1,0 +1,8 @@
+services:
+    mk_app_tasker:
+        class: MK\AppBundle\Service\Tasker
+        arguments: ["@doctrine.orm.entity_manager"]
+
+twig:
+    globals:
+        mk_app_tasker: "@mk_app_tasker"

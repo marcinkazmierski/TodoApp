@@ -110,11 +110,15 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var $task Task */
             $task = $form->getData();
             $task->setDeadline(new \DateTime($task->getDeadline()));
             $validator = $this->get('validator');
             $errors = $validator->validate($task);
             if (count($errors) === 0) {
+                if ($task->getStatus() === 2) {
+                    $task->setStatus(1);
+                }
                 $category = $task->getCategory();
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($task);
