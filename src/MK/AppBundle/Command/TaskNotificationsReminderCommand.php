@@ -3,6 +3,8 @@
 namespace MK\AppBundle\Command;
 
 use MK\AppBundle\Entity\Task;
+use MK\MailBundle\Service\MailTemplate;
+use MK\SMSBundle\Service\PlusSMSSender;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,6 +14,7 @@ use Symfony\Component\Console\Question\Question;
 use Doctrine\Common\Persistence\ObjectManager;
 use MK\UserBundle\Entity\User;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Routing\Router;
 
 class TaskNotificationsReminderCommand extends ContainerAwareCommand
 {
@@ -42,13 +45,21 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
             throw new \RuntimeException('The maximum runtime must be greater than zero.');
         }
 
-        $service = $this->getContainer()->get('mk_mail_engine.class');
+        /** @var $serviceMail MailTemplate */
+        $serviceMail = $this->getContainer()->get('mk_mail_engine.class');
+
+        /** @var $serviceSMS PlusSMSSender */
         $serviceSMS = $this->getContainer()->get('mk_sms_engine.class');
 
         $tasks = $this->entityManager->getRepository('MKAppBundle:Task')->findCurrentAllWithReminder();
         $now = new \DateTime();
         $base_domain = $this->getContainer()->getParameter('base_domain');
 
+
+        /** @var $router Router */
+        $router = $this->getContainer()->get('router');
+
+        $translator = $this->getContainer()->get('translator');
         /** @var $task Task */
         foreach ($tasks as $task) {
             $now_time = microtime(true);
@@ -57,24 +68,30 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
                 break;
             }
 
-            $this->getContainer()->get('translator')->setLocale('pl');
+            $locale = 'pl'; // TODO
+            $translator->setLocale($locale);
+            $url = $base_domain . $router->generate('edit_task', array('id' => $task->getId(), '_locale' => $locale));
 
-            $url = $base_domain . $this->getContainer()->get('router')->generate('edit_task', array('id' => $task->getId()));
-
-            $content = $this->getContainer()->get('translator')->trans('Your task: <a href="%link%">%title%</a> is expired: %date%.',
-                array('%title%' => $task->getTitle(), '%date%' => $task->getDeadline()->format("d-m-Y H:i"), '%link%' => $url)
+            $params = array(
+                'title' => $task->getTitle(),
+                'deadline' => $task->getDeadline()->format("d-m-Y H:i"),
+                'url' => $url,
             );
 
             $subject = $this->getContainer()->get('translator')->trans('task.reminder.subject');
             $user = $task->getUser();
-            $service->sendMail($subject, $content, $user->getEmail());
+            $serviceMail->sendMailWithTemplate($subject, $params, $user->getEmail(), 'task-notice');
 
             $phone = $user->getPhone();
             if (!empty($phone)) {
+                $content = $this->getContainer()->get('translator')->trans('Your task: %title% expired: %date%.',
+                    array('%title%' => $task->getTitle(), '%date%' => $task->getDeadline()->format("d-m-Y H:i"))
+                );
+
                 $serviceSMS->sendSMS($user->getPhone(), $content);
             }
-            $task->setLastSendNotice($now);
-            $this->entityManager->persist($task);
+            //   $task->setLastSendNotice($now);
+            //  $this->entityManager->persist($task);
         }
         $output->writeln('Send tasks: ' . count($tasks));
 

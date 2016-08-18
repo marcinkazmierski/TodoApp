@@ -8,3 +8,4 @@ security:
 views:
     add_new_task: 'Dodaj nowe zadanie'
     dashboard: 'Panel'
+

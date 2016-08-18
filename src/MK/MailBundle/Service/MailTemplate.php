@@ -13,7 +13,6 @@ use Symfony\Component\DependencyInjection\Container;
  *          $service->sendMail('Subject','Test message', 'sklepflock@gmail.com');
  *
  */
-
 class MailTemplate
 {
     private $container;
@@ -48,5 +47,12 @@ class MailTemplate
             $this->logger->error(sprintf("Error [Swift_Message] to [%s].", $mailTo));
         }
         return $result;
+    }
+
+    public function sendMailWithTemplate($subject, $params, $mailTo, $template)
+    {
+        $templateName = 'MKMailBundle:Emails:Parts/' . $template . '.html.twig';
+        $content = $this->templating->render($templateName, array('params' => $params));
+        $this->sendMail($subject, $content, $mailTo);
     }
 }
