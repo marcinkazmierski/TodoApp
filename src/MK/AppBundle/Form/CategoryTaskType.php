@@ -15,7 +15,7 @@ class CategoryTaskType extends AbstractType
         $builder
             ->add('name', TextType::class, array('label' => "Category title"))
             ->add('color', TextType::class, array('label' => 'Choose color'))
-            ->add('reminder', CheckboxType::class, array('label' => 'Auto reminder?'))
+            ->add('reminder', CheckboxType::class, array('label' => 'Auto reminder?', 'required'=>false))
             ->add('save', SubmitType::class, array('label' => 'Add category'));
     }
 

@@ -19,6 +19,9 @@
                 <span class="pull-right text-muted small">
                     <em>{{ category.tasks|length }}</em>
                 </span>
+                <a href="{{ path('edit_category', {'id':category.id}) }}" class="pull-right icon-link-action action-edit">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </a>
                 <a href="#" title="{{ 'delete_category'|trans }}"
                    data-delete-action="{{ url('category_delete', {'id':category.id} ) }}"
                    class="pull-right icon-link-action action-delete">

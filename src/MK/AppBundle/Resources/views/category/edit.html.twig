@@ -21,6 +21,10 @@
         </div>
     </div>
     <div class="form-group">
+        {{ form_label(form.reminder) }}
+        {{ form_widget(form.reminder) }}
+    </div>
+    <div class="form-group">
         {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
     </div>
     {{ form_end(form) }}
