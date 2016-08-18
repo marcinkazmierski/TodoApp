@@ -1,0 +1,30 @@
+old_sound_rabbit_mq:
+    connections:
+        default:
+            host:     'localhost'
+            port:     5672
+            user:     'guest'
+            password: 'guest'
+            vhost:    '/'
+            lazy:     false
+            connection_timeout: 3
+            read_write_timeout: 3
+
+            # requires php-amqplib v2.4.1+ and PHP5.4+
+            keepalive: false
+
+            # requires php-amqplib v2.4.1+
+            heartbeat: 0
+
+# Rabbit MQ
+    producers:
+        cron_tasks.prepare_mail:
+            connection:       default
+            exchange_options: { name: 'mail_sender', type: direct }
+
+    consumers:
+        send_mail:
+            connection: default
+            exchange_options: { name: 'mail_sender', type: direct }
+            queue_options: { name: 'mail_sender' }
+            callback: cron_tasks.send_mail

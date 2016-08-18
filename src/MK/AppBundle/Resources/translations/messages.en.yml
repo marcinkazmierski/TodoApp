@@ -1,0 +1,28 @@
+security:
+    login:
+        username: Username
+        password: Password
+        remember_me: Remember me
+        log_in: Log in
+    register:
+        username: Username
+        email: E-mail
+        password: Password
+registration:
+    submit: 'Sign in'
+    check_email: 'An email has been sent to %email%. It contains an activation link you must click to activate your account.'
+
+form:
+    username: Username
+    email: Email
+    password: Password
+    password_confirmation: 'Repeat password'
+
+views:
+    add_new_task: 'Add new task'
+    dashboard: 'Dashboard'
+
+
+Your task [%title%] is expired [%date%]. View this task %link%: "Your task [%title%] is expired [%date%]. View this task: %link%."
+Content: "Content :"
+task.reminder.subject: "Task reminder"

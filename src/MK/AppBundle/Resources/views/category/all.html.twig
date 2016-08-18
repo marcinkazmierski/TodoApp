@@ -1,0 +1,31 @@
+{% extends 'MKAppBundle::content.html.twig' %}
+
+{% block header_content %}
+
+    <div class="col-lg-12">
+        <h1 class="page-header">All categories <span class="badge">{{ categories.getTotalItemCount }}</span></h1>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    {% for key, category in categories %}
+        <p class="list-group-item">
+            <a style="color: {{ category.color }};" href="{{ path('show_category', {'id':category.id}) }}">
+                <i class="fa fa-tags fa-fw"></i> {{ category.name }}
+            </a>
+            <a href="{{ path('edit_category', {'id':category.id}) }}" class="pull-right icon-link-action action-edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <span class="pull-right text-muted small">
+                                    <em> {{ category.tasks|length }} </em>
+                                </span>
+        </p>
+    {% endfor %}
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(categories) }}
+    </div>
+
+{% endblock %}

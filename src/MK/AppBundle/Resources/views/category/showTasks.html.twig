@@ -1,0 +1,37 @@
+{% extends 'MKAppBundle::content.html.twig' %}
+
+{% block header_content %}
+
+    <div class="col-lg-12">
+        <h1 class="page-header">All tasks from category <span class="badge">{{ tasks.getTotalItemCount }}</span></h1>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    {% for key, task in tasks %}
+        <p class="list-group-item   {% if date(task.deadline) < date() %}critical-item{% endif %}">
+            <i class="fa fa-tasks fa-fw"></i> {{ task.title }}
+
+            <a href="#" class="pull-right icon-link-action">
+                <i class="fa fa-check" aria-hidden="true"></i>
+            </a>
+            <a href="{{ path('edit_task', {'id':task.id}) }}" class="pull-right icon-link-action">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <a href="#" class="pull-right icon-link-action">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+
+            <span class="pull-right text-muted small">
+                <em> {{ task.deadline|date('Y-m-d H:i:s') }}</em>
+            </span>
+        </p>
+    {% endfor %}
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(tasks) }}
+    </div>
+
+{% endblock %}

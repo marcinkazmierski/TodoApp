@@ -1,0 +1,10 @@
+security:
+    login:
+        username: 'Twój login'
+        password: 'Hasło'
+        remember_me: 'Zapamiętaj mnie'
+        log_in: 'Zaloguj się'
+
+views:
+    add_new_task: 'Dodaj nowe zadanie'
+    dashboard: 'Panel'

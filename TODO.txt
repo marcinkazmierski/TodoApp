@@ -1,0 +1,114 @@
+TODO:
+1) Tłumaczalne wszystkie teksty,
+2) wersje językowe,
+3) elastic search
+4) redis, memcached
+5) Panel admina: custom albo sonata
+
+
+https://github.com/symfony/symfony-demo
+--- pytania:
+1) cache: jak używać i konfigurować
+2) wielojęzyczność strony
+3) pisanie własnych komend - czy to potrzebne? kiedy przydatne?
+4) dlaczego sonata? Czy sonata jest trudna do opanowania?
+5) w demo jest folder repository - dlaczego i po co? :P
+6) demo: RedirectToPreferredLocaleListener - po co i dlaczego tak to jest roziązane? można inaczej?
+7) ciekawe bundle? :)
+8) dlaczego FOSUserBundle a nie jak w przykładzie demo?
+9) services.yml - jak definiować i po co?
+10) demo -> folder: CodeExplorerBundle - przeanalizować :)
+11) aliasy i SEO
+12) fajny sposób na stylowanie <select> ?
+
+
+http://symfony.com/doc/current/components/config/definition.html
+http://www.slideshare.net/javier.eguiluz/symfony-tips-and-tricks
+
+
+
+php bin/console generate:bundle --namespace=MK/UserBundle
+php bin/console assets:install web --symlink
+php bin/console doctrine:schema:update --force
+
+RabbitMQ
+https://github.com/php-amqplib/RabbitMqBundle
+
+guest / guest
+http://localhost:15672/
+
+Startujemy queue:
+php bin/console rabbitmq:consumer -w read_node
+                rabbitmq:consumer -m 50 upload_picture (50 wiadomości przekaże)
+
+
+
+------ notatki
+
+ OK  Symfony 3.0.0 was successfully installed. Now you can:
+
+    * Change your current directory to E:\xampp\htdocs\symfony2\application
+
+    * Configure your application in app/config/parameters.yml file.
+
+    * Run your application:
+        1. Execute the php bin/console server:run command.
+        2. Browse to the http://localhost:8000 URL.
+
+    * Read the documentation at http://symfony.com/doc
+
+You can check for syntax errors in Twig templates using the lint:twig console command:
+    php bin/console lint:twig app/Resources/views
+
+    Tworzenie bundle:
+    $ php bin/console generate:bundle --namespace=Acme/TestBundle
+
+
+    php bin/console doctrine:schema:update --force
+        // Doctrine can automatically create all the database tables needed for every known entity in your application.
+
+php bin/console doctrine:generate:entities AppBundle/Entity/Product
+This command makes sure that all the getters and setters are generated for the Product class
+
+testowanie:
+http://symfony-docs.pl/book/testing.html
+
+
+PL: http://symfony-docs.pl/
+
+pakujemy:
+tar -cvzf plik.tar.gz katalog_archiwizowany/
+wypakujemy:
+tar -xf plik.tar.gz
+
+
+cache:
+php bin/console cache:clear --env=prod
+
+
+doctrine: relations mapping:
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/association-mapping.html
+
+LiveCyclesDoc:
+http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/reference/events.html#lifecycle-events
+
+Forms:
+http://symfony2-docs-pl.readthedocs.org/pl/latest/book/forms.html
+
+
+W celu sprawdzenia wszystkich komunikatów w ustawieniu fr dla AppBundle, trzeba urychomić:
+$ php app/console debug:translation fr AppBundle
+Gdy pakiety mają duzo komunikatów, przydatne jest wyswietlenie tylko nieużywanych lub brakujących komunikatów, używając przełącznika --only-unused lub --only-missing:
+Pamiętać by po dodaniu nowego tłumaczenia wyczyścić cache:
+$ php bin/console cache:clear
+
+
+FOSUserBundle:
+https://symfony.com/doc/master/bundles/FOSUserBundle/user_manager.html
+
+
+assets:
+php bin/console assets:install web --symlink
+
+
+

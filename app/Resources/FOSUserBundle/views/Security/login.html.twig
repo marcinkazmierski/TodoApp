@@ -1,0 +1,50 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block body_classes_names %}login-page{% endblock %}
+
+{% block fos_user_content %}
+    {% if error %}
+        <div class="form-error">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        </div>
+    {% endif %}
+
+
+    <form class="form-signin" action="{{ path("fos_user_security_check") }}" method="post">
+        <div class="logo-login-wrapper">
+            <img src="{{ asset('bundles/mkapp/assets/img/logo.png') }}" class="img-responsive" alt="Cinque Terre">
+        </div>
+
+        <h2 class="form-signin-heading">Please sign in</h2>
+
+        <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control first"
+               placeholder="{{ 'security.login.username'|trans }}" required="required" autofocus>
+
+        <label for="password" class="sr-only">{{ 'security.login.password'|trans }}</label>
+        <input type="password" id="password" name="_password" class="form-control last"
+               placeholder="{{ 'security.login.password'|trans }}" required="required"/>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                {{ 'security.login.remember_me'|trans }}
+            </label>
+        </div>
+        <div class="">
+            <a href="{{ path('fos_user_registration_register') }}">
+                {{ 'security.login.register_text'|trans }}
+            </a>
+        </div>
+        <button name="_submit" class="btn btn-lg btn-primary btn-block" type="submit">
+            {{ 'security.login.log_in'|trans }}
+        </button>
+
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}"/>
+    </form>
+
+{% endblock fos_user_content %}

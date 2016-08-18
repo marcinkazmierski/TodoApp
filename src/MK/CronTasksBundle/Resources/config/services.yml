@@ -1,0 +1,13 @@
+services:
+
+    cron_tasks.prepare_mail:
+        class: MK\CronTasksBundle\Service\CronPrepareMail
+        arguments:
+            - "@old_sound_rabbit_mq.cron_tasks.prepare_mail_producer"
+
+    cron_tasks.send_mail:
+        class: MK\CronTasksBundle\Service\SendMail
+        arguments:
+            - "@logger"
+            - "@mk_mail_engine.class"
+

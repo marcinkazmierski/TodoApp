@@ -1,0 +1,49 @@
+mk_cron_tasks:
+    resource: "@MKCronTasksBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+mksms:
+    resource: "@MKSMSBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+mk_user:
+    resource: "@MKUserBundle/Controller/"
+    type:     annotation
+    prefix:   /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+mk_app:
+    resource: "@MKAppBundle/Controller/"
+    type:     annotation
+    prefix:   /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+mkfos_user:
+    resource: "@MKFOSUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'
+
+mk_mail:
+    resource: "@MKMailBundle/Controller/"
+    type:     annotation
+    prefix:   /{_locale}
+    requirements:
+        _locale: '%app_locales%'
+    defaults:
+        _locale: '%locale%'

@@ -1,0 +1,8 @@
+services:
+    mk_mail_engine.class:
+        class: MK\MailBundle\Service\MailTemplate
+        arguments: ['@service_container', '@templating', { address: %sender_address%, name: %sender_name% }, 'MKMailBundle:Emails:template.html.twig']
+
+parameters:
+    sender_address: 'sklepflock@gmail.com'
+    sender_name: 'TODOapp'
