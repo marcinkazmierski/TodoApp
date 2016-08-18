@@ -18,8 +18,8 @@ class IndexController extends Controller
      */
     public function indexAction(Request $request)
     {
-        $locale = $request->getLocale();
-        dump($locale);
+        // $locale = $request->getLocale();
+        // dump($locale);
         $currentUser = $this->getUser();
         $query = $this->getDoctrine()->getRepository('MKAppBundle:Task')->queryAll($currentUser);
 

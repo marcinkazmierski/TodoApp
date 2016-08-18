@@ -87,11 +87,10 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
                 $content = $this->getContainer()->get('translator')->trans('Your task: %title% expired: %date%.',
                     array('%title%' => $task->getTitle(), '%date%' => $task->getDeadline()->format("d-m-Y H:i"))
                 );
-
                 $serviceSMS->sendSMS($user->getPhone(), $content);
             }
-            //   $task->setLastSendNotice($now);
-            //  $this->entityManager->persist($task);
+            $task->setLastSendNotice($now);
+            $this->entityManager->persist($task);
         }
         $output->writeln('Send tasks: ' . count($tasks));
 
