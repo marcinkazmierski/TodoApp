@@ -4,6 +4,7 @@ namespace MK\UserBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use MK\UserBundle\Validator\Constraints as UserAssert;
 
 /**
  * @ORM\Entity
@@ -29,7 +30,7 @@ class User extends BaseUser
 
     /**
      * @ORM\Column(type="string", length=20, nullable=true)
-     *
+     * @UserAssert\ConstraintPhone
      */
     private $phone;
 
