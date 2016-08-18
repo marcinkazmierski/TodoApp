@@ -22,12 +22,13 @@ jQuery(function () {
 
         var url;
         var parent = jQuery(this).parents('.list-group-item');
-        url = jQuery(this).attr('data-task-action');
+        url = jQuery(this).attr('data-delete-action');
         jQuery.ajax({
             url: url,
             method: 'POST'
         }).done(function (data) {
             if (data.status == 1) {
+                // data.message -> TODO
                 jQuery(parent).fadeOut(500);
             }
         });

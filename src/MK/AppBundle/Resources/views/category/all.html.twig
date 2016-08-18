@@ -10,19 +10,23 @@
 
 {% block content %}
 
-    {% for key, category in categories %}
-        <p class="list-group-item">
-            <a style="color: {{ category.color }};" href="{{ path('show_category', {'id':category.id}) }}">
-                <i class="fa fa-tags fa-fw"></i> {{ category.name }}
-            </a>
-            <a href="{{ path('edit_category', {'id':category.id}) }}" class="pull-right icon-link-action action-edit">
-                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-            </a>
-            <span class="pull-right text-muted small">
-                                    <em> {{ category.tasks|length }} </em>
-                                </span>
-        </p>
-    {% endfor %}
+    <div class="category-list-wrapper">
+        {% for key, category in categories %}
+            <p class="list-group-item">
+                <a style="color: {{ category.color }};" href="{{ path('show_category', {'id':category.id}) }}">
+                    <i class="fa fa-tags fa-fw"></i> {{ category.name }}
+                </a>
+                <span class="pull-right text-muted small">
+                    <em>{{ category.tasks|length }}</em>
+                </span>
+                <a href="#" title="{{ 'delete_category'|trans }}"
+                   data-delete-action="{{ url('category_delete', {'id':category.id} ) }}"
+                   class="pull-right icon-link-action action-delete">
+                    <i class="fa fa-trash" aria-hidden="true"></i>
+                </a>
+            </p>
+        {% endfor %}
+    </div>
 
     <div class="navigation text-center">
         {{ knp_pagination_render(categories) }}

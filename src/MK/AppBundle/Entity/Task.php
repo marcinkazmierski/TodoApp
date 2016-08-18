@@ -47,7 +47,7 @@ class Task
     protected $deadline;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $lastSendNotice;
 

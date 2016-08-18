@@ -90,3 +90,8 @@ body.login-page {
 .list-group-item .badge {
     float: none;
 }
+
+.category-list-wrapper .text-muted.small {
+    margin-left: 15px;
+    padding-top: 2px;
+}

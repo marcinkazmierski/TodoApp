@@ -22,7 +22,7 @@
             <a href="{{ path('edit_task', {'id':task.id}) }}" class="pull-right icon-link-action action-edit">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
-            <a href="#" data-task-action="{{ url('task_delete', {'id':task.id} ) }}" class="pull-right icon-link-action action-delete">
+            <a href="#" data-delete-action="{{ url('task_delete', {'id':task.id} ) }}" class="pull-right icon-link-action action-delete">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
 
