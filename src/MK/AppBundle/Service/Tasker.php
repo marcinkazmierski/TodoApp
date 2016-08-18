@@ -2,6 +2,7 @@
 namespace MK\AppBundle\Service;
 
 use Doctrine\ORM\EntityManager;
+use MK\AppBundle\Entity\Task;
 use MK\UserBundle\Entity\User;
 
 /**
@@ -64,5 +65,36 @@ class Tasker
             return count($results);
         }
         return 0;
+    }
+
+    public function getDailyTasks(User $user)
+    {
+        $tab = array();
+        $last = new \DateTime();
+        $now = new \DateTime();
+        $now->setTime(23, 59);
+
+        $results = $this->entityManager->getRepository('MKAppBundle:Task')->queryAll($user, 2);
+        if ($results) {
+            /** @var $task Task */
+            foreach ($results as $task) {
+                $date = $task->getDoneDate();
+                if ($last > $date) {
+                    $last = $date;
+                }
+                if (!isset($tab[$date->format('Y-m-d')]['done'])) {
+                    $tab[$date->format('Y-m-d')]['done'] = 0;
+                }
+                $tab[$date->format('Y-m-d')]['done']++;
+            }
+        }
+
+        while ($last < $now) {
+            if (!isset($tab[$last->format('Y-m-d')]['done'])) {
+                $tab[$last->format('Y-m-d')]['done'] = 0;
+            }
+            $last->modify('+1 day');
+        }
+        return $tab;
     }
 }
