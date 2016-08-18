@@ -96,4 +96,8 @@ knp_paginator:
 monolog:
     channels: ["cron", "elastica", "services"]
 
+parameters:
+    user_role: CUSTOMER
+    user_roles: [CUSTOMER, ADMIN]
+    base_domain: http://todoapp/app_dev.php
 

@@ -111,4 +111,8 @@ assets:
 php bin/console assets:install web --symlink
 
 
+Cron tasks:
+php bin/console app:cron:task:reminder --max-runtime 5
+
+
 
