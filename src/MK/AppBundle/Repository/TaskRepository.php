@@ -99,7 +99,6 @@ class TaskRepository extends EntityRepository
         $today = new \DateTime();
         $yesterday = new \DateTime('-24 hours');
 
-        //todo join with category
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();
         $queryBuilder->select('t')
             ->from('MKAppBundle:Task', 't')
