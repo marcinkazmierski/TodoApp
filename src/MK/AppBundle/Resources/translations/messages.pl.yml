@@ -8,4 +8,7 @@ security:
 views:
     add_new_task: 'Dodaj nowe zadanie'
     dashboard: 'Panel'
-
+    all_tasks_todo: 'Wszystkich zadań'
+    all_tasks_done: 'Łącznie wykonanych zadań'
+    all_tasks_todo_today: 'Zadań na dziś'
+    all_tasks_done_today: 'Wykonanych zadań dziś'
