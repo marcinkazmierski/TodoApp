@@ -86,7 +86,7 @@ class RedirectToPreferredLocaleListener
         $request->setLocale($locale);
         if ($locateRedirect) {
             $params = $request->query->all();
-            //$event->setResponse(new RedirectResponse($request->getBaseUrl() . '/' . $locale . '/' . ($params ? '?' . http_build_query($params) : '')));
+            $event->setResponse(new RedirectResponse($request->getBaseUrl() . '/' . $locale . '/' . ($params ? '?' . http_build_query($params) : '')));
         }
     }
 }

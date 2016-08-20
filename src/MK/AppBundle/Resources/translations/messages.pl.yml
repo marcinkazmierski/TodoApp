@@ -4,6 +4,7 @@ security:
         password: 'Hasło'
         remember_me: 'Zapamiętaj mnie'
         log_in: 'Zaloguj się'
+        register_text: 'Nie masz konta? Zarejestruj się!'
 
 views:
     add_new_task: 'Dodaj nowe zadanie'

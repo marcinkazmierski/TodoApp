@@ -19,7 +19,7 @@
             <img src="{{ asset('bundles/mkapp/assets/img/logo.png') }}" class="img-responsive" alt="Cinque Terre">
         </div>
 
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">{{ 'security.login.log_in'|trans }}</h2>
 
         <label for="username" class="sr-only">{{ 'security.login.username'|trans }}</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control first"
