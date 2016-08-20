@@ -12,3 +12,10 @@ views:
     all_tasks_done: 'Łącznie wykonanych zadań'
     all_tasks_todo_today: 'Zadań na dziś'
     all_tasks_done_today: 'Wykonanych zadań dziś'
+    details: 'Zobacz'
+    all_tasks_done_time: 'Statystyki wykonanych zadań'
+    all_tasks: 'Zobacz wszystkie zadania'
+    last_minute: 'Ostatnie zadania'
+    done: 'Skończone'
+
+task_done: 'Wykonane'

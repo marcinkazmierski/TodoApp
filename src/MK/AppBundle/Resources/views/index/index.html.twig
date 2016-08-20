@@ -2,7 +2,7 @@
 
 {% block header_content %}
     <div class="col-lg-12">
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header">{{ 'views.dashboard'|trans }}</h1>
     </div>
 {% endblock %}
 
@@ -24,7 +24,7 @@
                 </div>
                 <a href="{{ path('all_tasks') }}">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">{{ 'views.details'|trans }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -46,7 +46,7 @@
                 </div>
                 <a href="{{ path('archives_tasks') }}">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">{{ 'views.details'|trans }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -68,7 +68,7 @@
                 </div>
                 <a href="{{ path('all_tasks') }}">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">{{ 'views.details'|trans }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -90,7 +90,7 @@
                 </div>
                 <a href="{{ path('archives_tasks') }}">
                     <div class="panel-footer">
-                        <span class="pull-left">View Details</span>
+                        <span class="pull-left">{{ 'views.details'|trans }}</span>
                         <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
                         <div class="clearfix"></div>
                     </div>
@@ -103,7 +103,8 @@
         <div class="col-lg-8">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-bar-chart-o fa-fw"></i> Area Chart Example
+                    <i class="fa fa-bar-chart-o fa-fw"></i>
+                    {{ 'views.all_tasks_done_time'|trans }}
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -121,7 +122,9 @@
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Notifications Panel <span
+                    <i class="fa fa-bell fa-fw"></i>
+                    {{ 'views.last_minute'|trans }}
+                    <span
                             class="badge">{{ tasks.getTotalItemCount }}</span>
                 </div>
                 <!-- /.panel-heading -->
@@ -139,7 +142,9 @@
 
                     </div>
                     <!-- /.list-group -->
-                    <a href="{{ path('all_tasks') }}" class="btn btn-default btn-block">View All Tasks</a>
+                    <a href="{{ path('all_tasks') }}" class="btn btn-default btn-block">
+                        {{ 'views.all_tasks'|trans }}
+                    </a>
                 </div>
                 <!-- /.panel-body -->
             </div>
@@ -169,7 +174,7 @@
                 ],
                 xkey: 'period',
                 ykeys: ['done'],
-                labels: ['Done'],
+                labels: ['{{ 'views.done'|trans }}'],
                 xLabels: 'day',
                 pointSize: 2,
                 hideHover: 'auto',
