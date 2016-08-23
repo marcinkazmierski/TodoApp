@@ -13,7 +13,9 @@
     {% for key, task in tasks %}
 
         <p class="list-group-item">
-            <i class="fa fa-tasks fa-fw"></i> {{ task.title }} <span class="badge">{{ task.category.name }}</span>
+            <i class="fa fa-tasks fa-fw"></i>
+            <a href="{{ path('show_task', {'id':task.id}) }}">{{ task.title }}</a>
+            <span class="badge">{{ task.category.name }}</span>
             <span class="label label-pill label-info ">{{ 'task_done'|trans }}</span>
             <a href="{{ path('edit_task', {'id':task.id}) }}" class="pull-right icon-link-action action-edit">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>

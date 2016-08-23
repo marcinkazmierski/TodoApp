@@ -89,12 +89,10 @@ class CategoryController extends Controller
         }
 
         $currentUser = $this->getUser();
-        $query = $this->getDoctrine()->getRepository('MKAppBundle:Task')->queryAllFromCategory($currentUser, $category);
-
+        $results = $this->getDoctrine()->getRepository('MKAppBundle:Task')->allFromCategory($currentUser, $category);
         $paginator = $this->get('knp_paginator');
-
         $tasks = $paginator->paginate(
-            $query,
+            $results,
             $request->query->getInt('page', 1),
             5
         );

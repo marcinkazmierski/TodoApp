@@ -17,9 +17,10 @@
                     <i class="fa fa-tags fa-fw"></i> {{ category.name }}
                 </a>
                 <span class="pull-right text-muted small">
-                    <em>{{ category.tasks|length }}</em>
+                    <em>{{ mk_app_tasker.allTasksFromCategory(app.user, category.id)|length }}</em>
                 </span>
-                <a href="{{ path('edit_category', {'id':category.id}) }}" class="pull-right icon-link-action action-edit">
+                <a href="{{ path('edit_category', {'id':category.id}) }}"
+                   class="pull-right icon-link-action action-edit">
                     <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                 </a>
                 <a href="#" title="{{ 'delete_category'|trans }}"

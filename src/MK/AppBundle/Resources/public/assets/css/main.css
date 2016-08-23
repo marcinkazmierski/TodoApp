@@ -82,7 +82,7 @@ body.login-page {
     font-weight: bold;
 }
 
-.icon-link-action, .icon-link-action:hover, .icon-link-action:active {
+.icon-link-action, .icon-link-action:hover, .icon-link-action:active, .icon-link-action:focus {
     font-size: 16px;
     margin-left: 12px;
     text-decoration: none;
@@ -107,4 +107,8 @@ body.login-page {
 
 .task-action-container {
     margin-top: 20px;
+}
+
+.user-profile-wrapper .row {
+    margin-bottom: 10px;
 }

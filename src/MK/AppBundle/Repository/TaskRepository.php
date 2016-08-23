@@ -68,12 +68,12 @@ class TaskRepository extends EntityRepository
         return $results;
     }
 
-    public function queryAllFromCategory(User $user, CategoryTask $category)
+    public function allFromCategory(User $user, CategoryTask $category)
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();
         $queryBuilder->select('t')
             ->from('MKAppBundle:Task', 't')
-            ->where('t.status > 0')
+            ->where('t.status = 1')
             ->andWhere('t.user = :user')
             ->andWhere('t.category = :category')
             ->orderBy('t.deadline', 'ASC')

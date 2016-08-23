@@ -130,7 +130,7 @@ class TaskController extends Controller
                     $this->get('translator')->trans('task.edit_success')
                 );
 
-                return $this->redirectToRoute('edit_task', array('id' => $task->getId()));
+                return $this->redirectToRoute('show_task', array('id' => $task->getId()));
             }
         }
         return $this->render('MKAppBundle::task/edit.html.twig', array(
