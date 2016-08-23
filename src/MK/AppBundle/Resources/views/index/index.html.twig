@@ -7,7 +7,6 @@
 {% endblock %}
 
 {% block content %}
-    <!-- /.row -->
     <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
@@ -98,7 +97,6 @@
             </div>
         </div>
     </div>
-    <!-- /.row -->
     <div class="row">
         <div class="col-lg-8">
             <div class="panel panel-default">
@@ -106,26 +104,17 @@
                     <i class="fa fa-bar-chart-o fa-fw"></i>
                     {{ 'views.all_tasks_done_time'|trans }}
                 </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div id="morris-area-chart"></div>
                 </div>
-                <!-- /.panel-body -->
             </div>
-            <!-- /.panel -->
-
-            <!-- /.panel -->
-
-            <!-- /.panel -->
         </div>
-        <!-- /.col-lg-8 -->
         <div class="col-lg-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <i class="fa fa-bell fa-fw"></i>
                     {{ 'views.last_minute'|trans }}
                 </div>
-                <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="list-group">
                         {% for key, task in tasks %}
@@ -138,21 +127,13 @@
                             </a>
                         {% endfor %}
                     </div>
-                    <!-- /.list-group -->
                     <a href="{{ path('all_tasks') }}" class="btn btn-default btn-block">
                         {{ 'views.all_tasks'|trans }}
                     </a>
                 </div>
-                <!-- /.panel-body -->
             </div>
-            <!-- /.panel -->
-
-            <!-- /.panel -->
-
         </div>
-        <!-- /.col-lg-4 -->
     </div>
-    <!-- /.row -->
 {% endblock %}
 {% block javascripts %}
     {{ parent() }}
