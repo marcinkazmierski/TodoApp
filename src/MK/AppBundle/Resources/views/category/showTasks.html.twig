@@ -11,7 +11,7 @@
 {% block content %}
 
     {% for key, task in tasks %}
-        <p class="list-group-item   {% if date(task.deadline) < date() %}critical-item{% endif %}">
+        <p class="list-group-item {% if date(task.deadline) < date() %}critical-item{% endif %}">
             <i class="fa fa-tasks fa-fw"></i> {{ task.title }}
 
             <a href="#" class="pull-right icon-link-action">

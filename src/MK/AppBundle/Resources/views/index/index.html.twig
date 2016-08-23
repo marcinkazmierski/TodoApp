@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ mk_app_tasker.getAllTasksTodoCount(app.user) }}</div>
-                            <div>{{ 'views.all_tasks_todo'|trans }}</div>
+                            <div class="home-box-text">{{ 'views.all_tasks_todo'|trans }}</div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ mk_app_tasker.getAllTasksArchivedCount(app.user) }}</div>
-                            <div>{{ 'views.all_tasks_done'|trans }}</div>
+                            <div class="home-box-text">{{ 'views.all_tasks_done'|trans }}</div>
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ mk_app_tasker.getAllTaskTodoTodayCount(app.user) }}</div>
-                            <div>{{ 'views.all_tasks_todo_today'|trans }}</div>
+                            <div class="home-box-text">{{ 'views.all_tasks_todo_today'|trans }}</div>
                         </div>
                     </div>
                 </div>
@@ -84,7 +84,7 @@
                         </div>
                         <div class="col-xs-9 text-right">
                             <div class="huge">{{ mk_app_tasker.getAllTaskDoneTodayCount(app.user) }}</div>
-                            <div>{{ 'views.all_tasks_done_today'|trans }}</div>
+                            <div class="home-box-text">{{ 'views.all_tasks_done_today'|trans }}</div>
                         </div>
                     </div>
                 </div>
@@ -124,22 +124,19 @@
                 <div class="panel-heading">
                     <i class="fa fa-bell fa-fw"></i>
                     {{ 'views.last_minute'|trans }}
-                    <span
-                            class="badge">{{ tasks.getTotalItemCount }}</span>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="list-group">
-
                         {% for key, task in tasks %}
-                            <a href="{{ path('edit_task', {'id':task.id}) }}" class="list-group-item">
+                            <a href="{{ path('edit_task', {'id':task.id}) }}"
+                               class="list-group-item {% if date(task.deadline) < date() %}critical-item{% endif %}">
                                 <i class="fa fa-tasks fa-fw"></i> {{ task.title }}
                                 <span class="pull-right text-muted small">
                                     <em> {{ task.deadline|date('Y-m-d H:i:s') }}</em>
                                 </span>
                             </a>
                         {% endfor %}
-
                     </div>
                     <!-- /.list-group -->
                     <a href="{{ path('all_tasks') }}" class="btn btn-default btn-block">
@@ -181,6 +178,5 @@
                 resize: true
             });
         });
-
     </script>
 {% endblock %}
