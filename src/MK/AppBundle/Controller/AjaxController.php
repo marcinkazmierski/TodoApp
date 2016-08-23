@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class AjaxController
@@ -43,9 +44,22 @@ class AjaxController extends Controller
             $em->persist($task);
             $em->flush();
 
+            $page = $request->request->get('page');
+
+            $action = '';
+            if ($page === 'show_task') {
+                $action = 'reload';
+
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('ajax.task_done')
+                );
+            }
+
             $response = array(
                 'message' => $this->get('translator')->trans('ajax.task_done'),
                 'status' => 1,
+                'action' => $action
             );
         }
 
@@ -72,9 +86,21 @@ class AjaxController extends Controller
             $em->remove($task);
             $em->flush();
 
+            $page = $request->request->get('page');
+
+            $action = '';
+            if ($page === 'show_task') {
+                $action = $this->generateUrl('homepage', array(), UrlGeneratorInterface::ABSOLUTE_URL);
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('ajax.task_delete_done')
+                );
+            }
+
             $response = array(
                 'message' => $this->get('translator')->trans('ajax.task_delete_done'),
                 'status' => 1,
+                'action' => $action
             );
         }
         return new JsonResponse($response, Response::HTTP_OK);

@@ -25,8 +25,7 @@ class Task
     protected $title;
 
     /**
-     * @Assert\NotBlank(message = "task.description.not_blank")
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="text", nullable=true)
      */
     protected $description;
 

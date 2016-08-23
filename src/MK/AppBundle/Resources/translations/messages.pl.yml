@@ -18,5 +18,13 @@ views:
     all_tasks: 'Zobacz wszystkie zadania'
     last_minute: 'Ostatnie zadania'
     done: 'Skończone'
+    deadline: 'Termin'
+    task_description: 'Szczegóły zadania'
+    expired: 'Zaległe'
+    done: 'Wykonane'
+    todo: 'Do wykonania'
+
+ajax:
+    task_done: 'Oznaczono zadanie jako wykonane'
 
 task_done: 'Wykonane'

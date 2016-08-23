@@ -24,7 +24,7 @@ class TaskType extends AbstractType
         $this->user = $options['user'];
         $builder
             ->add('title', TextType::class, array('label' => "Task title"))
-            ->add('description', TextareaType::class)
+            ->add('description', TextareaType::class, array('required' => false))
             ->add('deadline', TextType::class, array())
             ->add('category', EntityType::class, array(
                 'class' => CategoryTask::class,

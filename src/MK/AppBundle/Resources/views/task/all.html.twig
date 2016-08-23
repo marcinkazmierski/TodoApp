@@ -13,7 +13,9 @@
     {% for key, task in tasks %}
 
         <p class="list-group-item {% if date(task.deadline) < date() %}critical-item{% endif %}">
-            <i class="fa fa-tasks fa-fw"></i> {{ task.title }} <span class="badge">{{ task.category.name }}</span>
+            <i class="fa fa-tasks fa-fw"></i>
+            <a href="{{ path('show_task', {'id':task.id}) }}">{{ task.title }}</a>
+            <span class="badge">{{ task.category.name }}</span>
 
             <a href="#" data-task-action="{{ url('task_done', {'id':task.id} ) }}"
                class="pull-right icon-link-action action-done">
@@ -22,7 +24,8 @@
             <a href="{{ path('edit_task', {'id':task.id}) }}" class="pull-right icon-link-action action-edit">
                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
             </a>
-            <a href="#" data-delete-action="{{ url('task_delete', {'id':task.id} ) }}" class="pull-right icon-link-action action-delete">
+            <a href="#" data-delete-action="{{ url('task_delete', {'id':task.id} ) }}"
+               class="pull-right icon-link-action action-delete">
                 <i class="fa fa-trash" aria-hidden="true"></i>
             </a>
 

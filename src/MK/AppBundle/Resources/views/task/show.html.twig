@@ -1,0 +1,67 @@
+{% extends 'MKAppBundle::content.html.twig' %}
+
+{% block header_content %}
+
+    <div class="col-lg-12">
+        <h1 class="page-header ">
+            <i class="fa fa-tasks fa-fw"></i> {{ task.title }} <span class="badge">{{ task.category.name }}</span>
+        </h1>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="list-group-item task-show-container" data-page-action="show_task">
+
+        <p>
+            <span>
+                {{ 'views.status'|trans }}:
+            </span>
+            {% if task.status == 2 %}
+                <span class="label label-pill label-success ">
+                    {{ 'views.done'|trans }}
+                 </span>
+            {% elseif date(task.deadline) < date() %}
+                <span class="label label-pill label-danger ">
+                    {{ 'views.expired'|trans }}
+                </span>
+            {% else %}
+                <span class="label label-pill label-info ">
+                    {{ 'views.todo'|trans }}
+                </span>
+            {% endif %}
+        </p>
+
+        <p>
+            <span>
+                {{ 'views.deadline'|trans }}:
+            </span>
+            <em>{{ task.deadline|date('Y-m-d H:i:s') }}</em>
+        </p>
+
+        <p>
+            <span>
+                {{ 'views.task_description'|trans }}:
+            </span>
+            <em>{{ task.description }}</em>
+        </p>
+
+        <p class="task-action-container">
+            {% if task.status != 2 %}
+                <a href="#" data-task-action="{{ url('task_done', {'id':task.id} ) }}"
+                   class="  icon-link-action action-done">
+                    <i class="fa fa-check" aria-hidden="true"></i>
+                </a>
+            {% endif %}
+            <a href="{{ path('edit_task', {'id':task.id}) }}" class=" icon-link-action action-edit">
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+            </a>
+            <a href="#" data-delete-action="{{ url('task_delete', {'id':task.id} ) }}"
+               class="icon-link-action action-delete">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+        </p>
+    </div>
+{% endblock %}

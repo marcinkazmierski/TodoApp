@@ -116,3 +116,8 @@ php bin/console app:cron:task:reminder --max-runtime 5
 
 
 
+### TODO:
+- cache /index values for boxes.
+- add lang for user account - for notifications
+
+

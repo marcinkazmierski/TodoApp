@@ -82,9 +82,10 @@ body.login-page {
     font-weight: bold;
 }
 
-.icon-link-action {
+.icon-link-action, .icon-link-action:hover, .icon-link-action:active {
     font-size: 16px;
     margin-left: 12px;
+    text-decoration: none;
 }
 
 .list-group-item .badge {
@@ -98,4 +99,12 @@ body.login-page {
 
 .home-box-text {
     min-height: 40px;
+}
+
+.task-show-container > p > span {
+    font-weight: bold;
+}
+
+.task-action-container {
+    margin-top: 20px;
 }

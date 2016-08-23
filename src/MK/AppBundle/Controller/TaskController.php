@@ -159,4 +159,21 @@ class TaskController extends Controller
             'tasks' => $tasks
         ));
     }
+
+
+    /**
+     * @Route("/{id}/show", name="show_task")
+     */
+    public function showAction(Request $request, Task $task)
+    {
+        $tp = new TaskPermissions();
+
+        if (!$tp->isTaskAuthor($task, $this->getUser())) {
+            throw $this->createAccessDeniedException($this->get('translator')->trans('access.denied.text'));
+        }
+
+        return $this->render('MKAppBundle::task/show.html.twig', array(
+            'task' => $task
+        ));
+    }
 }
