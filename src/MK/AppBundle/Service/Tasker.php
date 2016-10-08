@@ -67,6 +67,9 @@ class Tasker
         return 0;
     }
 
+    /**
+     * {% set tab = mk_app_tasker.getDailyTasks(app.user) %}
+     */
     public function getDailyTasks(User $user)
     {
         $tab = array();

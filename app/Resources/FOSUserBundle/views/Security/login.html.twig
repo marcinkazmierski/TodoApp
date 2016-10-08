@@ -1,5 +1,9 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+    <link href="{{ asset('bundles/mkapp/assets/css/login.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_classes_names %}login-page{% endblock %}
 
 {% block fos_user_content %}
