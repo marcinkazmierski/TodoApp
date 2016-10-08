@@ -45,6 +45,32 @@ body, *, div, p, span, h1, h2, h3, h4 {
     margin-bottom: 10px;
 }
 
-.main-container{
-    margin-top: 50px;
+.main-container {
+    margin-top: 60px;
 }
+
+.home-categories .glyphicon {
+    border-radius: 2px;
+    padding: 3px;
+    margin-left: 4px;
+}
+
+.home-categories .list-group .glyphicon:hover,
+.home-categories .list-group .glyphicon:focus {
+    background-color: #f9f9f9;
+}
+
+.row.match-my-cols {
+    overflow: hidden;
+}
+
+.row.match-my-cols [class*="col-"] {
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+}
+
+.home-add-category {
+    padding-top: 40px;
+}
+
+
