@@ -1,5 +1,6 @@
 jQuery(function () {
 
+    var currentCategoryBox = false;
 
     jQuery('.action-submit').click(function () {
         var $this = jQuery(this);
@@ -16,6 +17,7 @@ jQuery(function () {
             if (data.status == 1) {
                 var modal = $('#addNewTask');
                 createAlert(data.message);
+                loadTasksBox(currentCategoryBox);
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
                 alert(data.message);
             } else {
@@ -61,6 +63,8 @@ jQuery(function () {
             var category = jQuery(this).attr('data-category');
             var $this = jQuery(this);
             $this.button('loading');
+
+            currentCategoryBox = jQuery(this).parents('.home-category-box');
 
             jQuery.ajax({
                 url: action,

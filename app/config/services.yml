@@ -13,4 +13,8 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.exception, method: onKernelRequest }
 
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }
 
