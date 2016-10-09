@@ -36,6 +36,7 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $response = array();
             /** @var $task Task */
             $task = $form->getData();
             $task->setStatus(1);
@@ -47,28 +48,35 @@ class TaskController extends Controller
                 $category = $task->getCategory();
                 $em = $this->getDoctrine()->getManager();
 
-                //$task->setDeadline(new \DateTime($task->getDeadline()));
+                if ($task->getDeadline()) {
+                    $task->setDeadline(new \DateTime($task->getDeadline()));
+                }
 
-                $em->persist($task);
-                $em->persist($category);
-                $em->flush();
+                try {
+                    $em->persist($task);
+                    $em->persist($category);
+                    $em->flush();
 
-                $response = array(
-                    'message' => $this->get('translator')->trans('task.added_new <i>%name%</i>', array('%name%' => $task->getTitle())),
-                    'status' => 1,
-                    'content' => ''
-                );
-
-                return new JsonResponse($response, Response::HTTP_OK);
+                    $response = array(
+                        'message' => $this->get('translator')->trans('task.added_new <i>%name%</i>', array('%name%' => $task->getTitle())),
+                        'status' => 1,
+                        'content' => ''
+                    );
+                } catch (\Exception $e) {
+                    $response = array(
+                        'message' => $this->get('translator')->trans('task.something_wrong'),
+                        'status' => 0,
+                        'content' => ''
+                    );
+                }
             } else {
                 $response = array(
                     'message' => $this->get('translator')->trans('task.invalid_data'),
                     'status' => 0,
                     'content' => ''
                 );
-
-                return new JsonResponse($response);
             }
+            return new JsonResponse($response);
         }
 
         $render = $this->render('MKAppBundle::task/new-task.html.twig', array(
