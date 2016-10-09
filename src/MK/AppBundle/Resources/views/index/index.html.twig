@@ -2,163 +2,16 @@
 
 {% block content %}
     <div class="row home-categories">
-        <div class="col-md-4">
-            <h3>
-                Dom
-                <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
-                        data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
-                        data-action="{{ url('new_task') }}" data-category="5">
-                    Dodaj nowe zadanie
-                </button>
-            </h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-success">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
 
-                <a href="#" class="list-group-item list-group-item-success">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-success">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-success">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-success active">
-                    <strong>
-                        Zobacz więcej zadań
-                    </strong>
-                    <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                </a>
+        {% for key, category in categories %}
+            <div class="col-md-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
+                Loading...
             </div>
-        </div>
-
-        <div class="col-md-4">
-            <h3>
-                Praca
-                <button type="button" class="btn btn-default pull-right btn-xs">Dodaj nowe zadanie</button>
-            </h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-info">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-info">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-info">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-info">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-info">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <h3>
-                Zakupy
-                <button type="button" class="btn btn-default pull-right btn-xs">Dodaj nowe zadanie</button>
-            </h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-warning">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-warning">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-warning">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-warning">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-warning active">
-                    <strong>
-                        Zobacz więcej zadań
-                    </strong>
-                    <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                </a>
-            </div>
-        </div>
+        {% endfor %}
     </div>
     <div class="row home-categories match-my-cols">
         <div class="col-md-4">
-            <h3>
-                Moje projekty
-                <button type="button" class="btn btn-default pull-right btn-xs">Dodaj nowe zadanie</button>
-            </h3>
-            <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-danger">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
 
-                <a href="#" class="list-group-item list-group-item-danger">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-danger">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-danger">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-
-                <a href="#" class="list-group-item list-group-item-danger">
-                    Dapibus ac facilisis in
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-            </div>
         </div>
 
         <div class="col-md-4">

@@ -4,11 +4,13 @@ namespace MK\AppBundle\Controller;
 
 use MK\AppBundle\Entity\CategoryTask;
 use MK\AppBundle\Form\CategoryTaskType;
+use MK\AppBundle\Repository\TaskRepository;
 use MK\AppBundle\Utils\CategoryTaskPermissions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -144,5 +146,37 @@ class CategoryController extends Controller
             'category' => $category,
             'form' => $form->createView(),
         ));
+    }
+
+    /**
+     * @Route("/ajax/{id}", name="show_ajax_category")
+     */
+    public function getTasksFromCategoryAction(Request $request, CategoryTask $category)
+    {
+        $tc = new CategoryTaskPermissions();
+
+        if (!$tc->isCategoryTaskAuthor($category, $this->getUser())) {
+            throw $this->createAccessDeniedException($this->get('translator')->trans('access.denied.text'));
+        }
+
+        $currentUser = $this->getUser();
+
+        /** @var $taskRepository TaskRepository */
+        $taskRepository = $this->getDoctrine()->getRepository('MKAppBundle:Task');
+        $results = $taskRepository->allFromCategory($currentUser, $category, 5);
+
+        $render = $this->render('MKAppBundle::category/showAjaxTasks.html.twig', array(
+            'tasks' => $results,
+            'category' => $category
+        ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+
+        return new JsonResponse($response);
+
     }
 }

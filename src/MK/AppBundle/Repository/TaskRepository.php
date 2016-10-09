@@ -68,7 +68,7 @@ class TaskRepository extends EntityRepository
         return $results;
     }
 
-    public function allFromCategory(User $user, CategoryTask $category)
+    public function allFromCategory(User $user, CategoryTask $category, $limit = 0)
     {
         $queryBuilder = $this->getEntityManager()->createQueryBuilder();
         $queryBuilder->select('t')
@@ -76,9 +76,12 @@ class TaskRepository extends EntityRepository
             ->where('t.status = 1')
             ->andWhere('t.user = :user')
             ->andWhere('t.category = :category')
-            ->orderBy('t.deadline', 'ASC')
+            ->orderBy('t.id', 'DESC')
             ->setParameter('category', $category)
             ->setParameter('user', $user);
+        if ($limit > 0) {
+            $queryBuilder->setMaxResults($limit);
+        }
         $results = $queryBuilder->getQuery()->getResult(); // HYDRATE_ARRAY -> as array results
         return $results;
     }

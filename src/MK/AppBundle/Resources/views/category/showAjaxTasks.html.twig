@@ -1,0 +1,35 @@
+{% block content %}
+
+    <h3>
+        {{ category.name }}
+        <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
+                data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
+                data-action="{{ url('new_task') }}" data-category="{{ category.id }}">
+            Dodaj nowe zadanie
+        </button>
+    </h3>
+    <div class="list-group">
+
+        {% for key, task in tasks %}
+            <a href="#" class="list-group-item list-group-item-info">
+                {{ task.title }}
+                <span class="text-muted small">
+                    <em>
+                       {% if  task.deadline is not null %}
+                           {{ task.deadline|date('Y-m-d H:i:s') }}
+                       {% endif %}
+                    </em>
+                </span>
+                <span class="glyphicon glyphicon-pencil pull-right"></span>
+                <span class="glyphicon glyphicon-ok pull-right"></span>
+            </a>
+        {% endfor %}
+
+        <a href="#" class="list-group-item list-group-item-info active">
+            <strong>
+                Zobacz więcej zadań
+            </strong>
+            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+        </a>
+    </div>
+{% endblock %}

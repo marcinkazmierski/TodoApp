@@ -1,48 +1,5 @@
 jQuery(function () {
 
-    jQuery('.add-new-task').click(function () {
-        var action = jQuery(this).attr('data-action');
-        var category = jQuery(this).attr('data-category');
-        var $this = jQuery(this);
-        $this.button('loading');
-
-        jQuery.ajax({
-            url: action,
-            method: 'GET'
-        }).done(function (data) {
-            $this.button('reset');
-            if (data.status == 1) {
-                var modal = $('#addNewTask');
-                var content = data.content;
-                jQuery(modal).find('.modal-body').html(content);
-                jQuery(modal).find('.modal-body').find('.field-category-id').val(category);
-                jQuery(modal).find('.action-submit').attr('data-action', action);
-                jQuery(modal).modal('show');
-
-                // http://xdsoft.net/jqplugins/datetimepicker/
-                jQuery('.datepicker').datetimepicker({
-                    format: 'd.m.Y H:i',
-                    lang: 'en'
-                });
-                tinymce.remove();
-                tinymce.init({
-                    selector:'#addNewTask textarea',
-                    menubar: false,
-                    setup: function (editor) {
-                        editor.on('change', function () {
-                            editor.save();
-                        });
-                    }
-                });
-            } else if (data.status == 0 && typeof data.message !== 'undefined') {
-                alert(data.message);
-            } else {
-                alert('Error!');
-            }
-        });
-        return false;
-    });
-
 
     jQuery('.action-submit').click(function () {
         var $this = jQuery(this);
@@ -69,6 +26,23 @@ jQuery(function () {
         return false;
     });
 
+    jQuery('.home-category-box').each(function () {
+        loadTasksBox(this);
+    });
+
+    function loadTasksBox(el) {
+        var action = jQuery(el).attr('data-action');
+        var $this = jQuery(el);
+        jQuery.ajax({
+            url: action,
+            method: 'GET'
+        }).done(function (data) {
+            if (data.status == 1) {
+                $this.html(data.content);
+                bindAddNewTask($this);
+            }
+        });
+    }
 
     function createAlert(message, type) {
         if (type == undefined) {
@@ -79,5 +53,50 @@ jQuery(function () {
         html += message;
         html += '</div></div></div></div>';
         jQuery('.flash-messages').html(html);
+    }
+
+    function bindAddNewTask(el) {
+        jQuery(el).find('.add-new-task').click(function () {
+            var action = jQuery(this).attr('data-action');
+            var category = jQuery(this).attr('data-category');
+            var $this = jQuery(this);
+            $this.button('loading');
+
+            jQuery.ajax({
+                url: action,
+                method: 'GET'
+            }).done(function (data) {
+                $this.button('reset');
+                if (data.status == 1) {
+                    var modal = $('#addNewTask');
+                    var content = data.content;
+                    jQuery(modal).find('.modal-body').html(content);
+                    jQuery(modal).find('.modal-body').find('.field-category-id').val(category);
+                    jQuery(modal).find('.action-submit').attr('data-action', action);
+                    jQuery(modal).modal('show');
+
+                    // http://xdsoft.net/jqplugins/datetimepicker/
+                    jQuery('.datepicker').datetimepicker({
+                        format: 'd.m.Y H:i',
+                        lang: 'en'
+                    });
+                    tinymce.remove();
+                    tinymce.init({
+                        selector: '#addNewTask textarea',
+                        menubar: false,
+                        setup: function (editor) {
+                            editor.on('change', function () {
+                                editor.save();
+                            });
+                        }
+                    });
+                } else if (data.status == 0 && typeof data.message !== 'undefined') {
+                    alert(data.message);
+                } else {
+                    alert('Error!');
+                }
+            });
+            return false;
+        });
     }
 });

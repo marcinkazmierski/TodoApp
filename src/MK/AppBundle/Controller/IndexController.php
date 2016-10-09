@@ -2,6 +2,7 @@
 
 namespace MK\AppBundle\Controller;
 
+use MK\AppBundle\Repository\CategoryTaskRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -21,18 +22,13 @@ class IndexController extends Controller
         // $locale = $request->getLocale();
         // dump($locale);
         $currentUser = $this->getUser();
-        $query = $this->getDoctrine()->getRepository('MKAppBundle:Task')->queryAll($currentUser);
+        /** @var $categoryTaskRepository CategoryTaskRepository */
+        $categoryTaskRepository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
+        $categories = $categoryTaskRepository->queryAll($currentUser);
 
-        $paginator = $this->get('knp_paginator');
-
-        $tasks = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5
-        );
-
+dump($categories);
         return $this->render('MKAppBundle::index/index.html.twig', array(
-            'tasks' => $tasks
+            'categories' => $categories
         ));
     }
 }
