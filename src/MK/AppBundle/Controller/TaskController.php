@@ -12,12 +12,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
- * @Route("/task")
+ * @Route("/ajax/task")
  * @Security("has_role('CUSTOMER')")
  */
 class TaskController extends Controller
@@ -64,9 +66,21 @@ class TaskController extends Controller
             }
         }
 
-        return $this->render('MKAppBundle::task/new-task.html.twig', array(
+        //   return $this->render('MKAppBundle::task/new-task.html.twig', array(
+        //       'form' => $form->createView(),
+        //  ));
+        $render = $this->render('MKAppBundle::task/new-task.html.twig', array(
             'form' => $form->createView(),
         ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' =>  $render->getContent()
+        );
+
+        return new JsonResponse($response, Response::HTTP_OK);
+
     }
 
     /**

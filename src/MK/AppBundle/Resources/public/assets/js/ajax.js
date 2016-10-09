@@ -47,4 +47,26 @@ jQuery(function () {
         });
         return false;
     });
+
+    jQuery('.add-new-task').click(function () {
+        var action = jQuery(this).attr('data-action');
+        var category = jQuery(this).attr('data-category');
+
+        jQuery.ajax({
+            url: action,
+            data: {category: category},
+            method: 'POST'
+        }).done(function (data) {
+            if (data.status == 1) {
+                console.log(data);
+                var modal = $('#addNewTask');
+                jQuery(modal).find('.modal-body').html(data.content);
+                jQuery(modal).modal('show');
+
+            } else if (data.status == 0 && typeof data.message !== 'undefined') {
+                alert(data.message);
+            }
+        });
+        return false;
+    });
 });

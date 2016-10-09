@@ -1,38 +1,25 @@
-{% extends 'MKAppBundle::content.html.twig' %}
+{{ form_start(form) }}
+<div class="form-group">
+    {{ form_label(form.title) }}
+    {{ form_widget(form.title, {   'attr': {'class': 'form-control', 'placeholder':'form.task.title'|trans} }) }}
+</div>
 
-{% block header_content %}
+<div class="form-group">
+    {{ form_label(form.description) }}
+    {{ form_widget(form.description, {   'attr': {'class': 'form-control', 'placeholder':'form.task.description'|trans} }) }}
+</div>
 
-    <div class="col-lg-12">
-        <h1 class="page-header">Add new task</h1>
-    </div>
-
-{% endblock %}
-
-{% block content %}
-    {{ form_start(form) }}
-    <div class="form-group">
-        {{ form_label(form.title) }}
-        {{ form_widget(form.title, {   'attr': {'class': 'form-control', 'placeholder':'form.task.title'|trans} }) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description, {   'attr': {'class': 'form-control', 'placeholder':'form.task.description'|trans} }) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.deadline) }}
-        {{ form_widget(form.deadline, {   'attr': {'class': 'datepicker form-control', 'placeholder':'form.task.deadline'|trans} }) }}
-    </div>
+<div class="form-group">
+    {{ form_label(form.deadline) }}
+    {{ form_widget(form.deadline, {   'attr': {'class': 'datepicker form-control', 'placeholder':'form.task.deadline'|trans} }) }}
+</div>
 
 
-    <div class="form-group">
-        {{ form_label(form.category) }}
-        {{ form_widget(form.category, {   'attr': {'class': 'form-control', 'placeholder':'form.task.category'|trans} }) }}
-    </div>
-    <div class="form-group">
-        {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
-    </div>
-
-    {{ form_end(form) }}
-{% endblock %}
+<div class="form-group">
+    {{ form_label(form.category) }}
+    {{ form_widget(form.category, {   'attr': {'class': 'form-control', 'placeholder':'form.task.category'|trans} }) }}
+</div>
+<div class="form-group">
+    {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
+</div>
+{{ form_end(form) }}
