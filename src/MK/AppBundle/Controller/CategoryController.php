@@ -175,8 +175,6 @@ class CategoryController extends Controller
             'status' => 1,
             'content' => $render->getContent()
         );
-
         return new JsonResponse($response);
-
     }
 }

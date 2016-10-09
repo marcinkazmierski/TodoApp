@@ -1,5 +1,4 @@
 {% block content %}
-
     <h3>
         {{ category.name }}
         <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
@@ -9,7 +8,6 @@
         </button>
     </h3>
     <div class="list-group">
-
         {% for key, task in tasks %}
             <a href="#" class="list-group-item list-group-item-info">
                 {{ task.title|truncate(25, true) }}
@@ -24,7 +22,6 @@
                 <span class="glyphicon glyphicon-ok pull-right"></span>
             </a>
         {% endfor %}
-
         <a href="#" class="list-group-item list-group-item-info active">
             <strong>
                 Zobacz więcej zadań
