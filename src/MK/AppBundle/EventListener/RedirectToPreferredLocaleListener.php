@@ -67,6 +67,7 @@ class RedirectToPreferredLocaleListener
      */
     public function onKernelRequest(GetResponseEvent $event)
     {
+        /*
         $request = $event->getRequest();
         if (!$request->hasPreviousSession()) {
             return;
@@ -88,5 +89,6 @@ class RedirectToPreferredLocaleListener
             $params = $request->query->all();
             $event->setResponse(new RedirectResponse($request->getBaseUrl() . '/' . $locale . '/' . ($params ? '?' . http_build_query($params) : '')));
         }
+        */
     }
 }
