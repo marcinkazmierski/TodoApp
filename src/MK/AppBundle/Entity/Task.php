@@ -41,7 +41,7 @@ class Task
     protected $doneDate;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     protected $deadline;
 
@@ -159,7 +159,7 @@ class Task
     /**
      * Set created
      *
-     * @param integer $created
+     * @param \DateTime $created
      *
      * @return Task
      */
@@ -173,7 +173,7 @@ class Task
     /**
      * Get created
      *
-     * @return integer
+     * @return \DateTime
      */
     public function getCreated()
     {

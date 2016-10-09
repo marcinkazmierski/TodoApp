@@ -25,7 +25,7 @@ class TaskType extends AbstractType
         $builder
             ->add('title', TextType::class, array('label' => "Task title"))
             ->add('description', TextareaType::class, array('required' => false))
-            ->add('deadline', TextType::class, array())
+            ->add('deadline', TextType::class, array('required' => false))
             ->add('category', EntityType::class, array(
                 'class' => CategoryTask::class,
                 'query_builder' => function (EntityRepository $er) {

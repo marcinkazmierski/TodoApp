@@ -17,6 +17,6 @@
         </div>
     </div>
 </div>
-<input type="hidden" name="{{ form.category.vars.full_name }}" value="{{ form.category.vars.value }}">
+<input type="hidden" class="field-category-id" name="{{ form.category.vars.full_name }}" value="{{ form.category.vars.value }}">
 {% do form.category.setRendered %}
 {{ form_end(form) }}

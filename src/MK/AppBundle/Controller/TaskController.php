@@ -36,6 +36,7 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            /** @var $task Task */
             $task = $form->getData();
             $task->setStatus(1);
             $task->setUser($this->getUser());
@@ -46,29 +47,30 @@ class TaskController extends Controller
                 $category = $task->getCategory();
                 $em = $this->getDoctrine()->getManager();
 
-                $task->setDeadline(new \DateTime($task->getDeadline()));
+                //$task->setDeadline(new \DateTime($task->getDeadline()));
 
                 $em->persist($task);
                 $em->persist($category);
                 $em->flush();
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans('task.added_new')
+                $response = array(
+                    'message' => $this->get('translator')->trans('task.added_new <i>%name%</i>', array('%name%' => $task->getTitle())),
+                    'status' => 1,
+                    'content' => ''
                 );
 
-                return $this->redirectToRoute('new_task');
+                return new JsonResponse($response, Response::HTTP_OK);
             } else {
-                $this->addFlash(
-                    'error',
-                    $this->get('translator')->trans('task.invalid_data')
+                $response = array(
+                    'message' => $this->get('translator')->trans('task.invalid_data'),
+                    'status' => 0,
+                    'content' => ''
                 );
+
+                return new JsonResponse($response);
             }
         }
 
-        //   return $this->render('MKAppBundle::task/new-task.html.twig', array(
-        //       'form' => $form->createView(),
-        //  ));
         $render = $this->render('MKAppBundle::task/new-task.html.twig', array(
             'form' => $form->createView(),
         ));
@@ -76,11 +78,10 @@ class TaskController extends Controller
         $response = array(
             'message' => '',
             'status' => 1,
-            'content' =>  $render->getContent()
+            'content' => $render->getContent()
         );
 
-        return new JsonResponse($response, Response::HTTP_OK);
-
+        return new JsonResponse($response);
     }
 
     /**
