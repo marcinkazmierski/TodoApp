@@ -12,7 +12,7 @@
 
         {% for key, task in tasks %}
             <a href="#" class="list-group-item list-group-item-info">
-                {{ task.title|truncate(30, true) }}
+                {{ task.title|truncate(25, true) }}
                 <span class="text-muted small">
                     <em>
                        {% if  task.deadline is not null %}

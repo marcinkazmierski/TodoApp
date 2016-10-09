@@ -26,7 +26,6 @@ class IndexController extends Controller
         $categoryTaskRepository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
         $categories = $categoryTaskRepository->queryAll($currentUser);
 
-dump($categories);
         return $this->render('MKAppBundle::index/index.html.twig', array(
             'categories' => $categories
         ));

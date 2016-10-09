@@ -1,18 +1,13 @@
 {% extends 'MKAppBundle::content.html.twig' %}
 
 {% block content %}
-    <div class="row home-categories">
+    <div class="row home-categories match-my-cols">
 
         {% for key, category in categories %}
             <div class="col-md-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
                 Loading...
             </div>
         {% endfor %}
-    </div>
-    <div class="row home-categories match-my-cols">
-        <div class="col-md-4">
-
-        </div>
 
         <div class="col-md-4">
             <h3>
@@ -26,7 +21,6 @@
             </div>
         </div>
     </div>
-
 
     <!-- Modal -->
     <div id="addNewTask" class="modal fade" role="dialog">
