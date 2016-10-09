@@ -24,6 +24,16 @@ jQuery(function () {
                     format: 'd.m.Y H:i',
                     lang: 'en'
                 });
+                tinymce.remove();
+                tinymce.init({
+                    selector:'#addNewTask textarea',
+                    menubar: false,
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            editor.save();
+                        });
+                    }
+                });
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
                 alert(data.message);
             } else {
