@@ -5,7 +5,11 @@
         <div class="col-md-4">
             <h3>
                 Dom
-                <button type="button" class="btn btn-default pull-right btn-xs add-new-task" data-action="{{ url('new_task') }}" data-category="5">Dodaj nowe zadanie</button>
+                <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
+                        data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
+                        data-action="{{ url('new_task') }}" data-category="5">
+                    Dodaj nowe zadanie
+                </button>
             </h3>
             <div class="list-group">
                 <a href="#" class="list-group-item list-group-item-success">
@@ -181,11 +185,9 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title">Dodaj nowe zadanie</h4>
                 </div>
-                <div class="modal-body">
-                    <p>Some text in the modal.</p>
-                </div>
+                <div class="modal-body"></div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" >Dodaj</button>
+                    <button type="button" class="btn btn-info">Dodaj</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>

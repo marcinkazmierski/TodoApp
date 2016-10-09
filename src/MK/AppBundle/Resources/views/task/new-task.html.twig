@@ -9,17 +9,14 @@
     {{ form_widget(form.description, {   'attr': {'class': 'form-control', 'placeholder':'form.task.description'|trans} }) }}
 </div>
 
-<div class="form-group">
-    {{ form_label(form.deadline) }}
-    {{ form_widget(form.deadline, {   'attr': {'class': 'datepicker form-control', 'placeholder':'form.task.deadline'|trans} }) }}
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            {{ form_label(form.deadline) }}
+            {{ form_widget(form.deadline, {   'attr': {'class': 'datepicker form-control', 'placeholder':'form.task.deadline'|trans} }) }}
+        </div>
+    </div>
 </div>
-
-
-<div class="form-group">
-    {{ form_label(form.category) }}
-    {{ form_widget(form.category, {   'attr': {'class': 'form-control', 'placeholder':'form.task.category'|trans} }) }}
-</div>
-<div class="form-group">
-    {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
-</div>
+<input type="hidden" name="{{ form.category.vars.full_name }}" value="{{ form.category.vars.value }}">
+{% do form.category.setRendered %}
 {{ form_end(form) }}

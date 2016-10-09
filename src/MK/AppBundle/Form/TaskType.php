@@ -33,7 +33,7 @@ class TaskType extends AbstractType
                 },
                 'placeholder' => 'Choose an option',
                 'choice_label' => 'name',
-            ))->add('save', SubmitType::class, array('label' => 'Add task'));
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

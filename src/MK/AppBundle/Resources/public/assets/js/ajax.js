@@ -51,12 +51,15 @@ jQuery(function () {
     jQuery('.add-new-task').click(function () {
         var action = jQuery(this).attr('data-action');
         var category = jQuery(this).attr('data-category');
+        var $this = jQuery(this);
+        $this.button('loading');
 
         jQuery.ajax({
             url: action,
             data: {category: category},
             method: 'POST'
         }).done(function (data) {
+            $this.button('reset');
             if (data.status == 1) {
                 console.log(data);
                 var modal = $('#addNewTask');
