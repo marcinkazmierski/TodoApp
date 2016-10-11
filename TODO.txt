@@ -4,7 +4,12 @@ TODO:
 3) elastic search
 4) redis, memcached
 5) Panel admina: custom albo sonata
+6) menu
+7) 
 
+-------------------------------
+Notatki:
+-------------------------------
 
 https://github.com/symfony/symfony-demo
 --- pytania:
