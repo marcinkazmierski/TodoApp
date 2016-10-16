@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * @Route("/category")
+ * @Route("/ajax/category")
  * @Security("has_role('CUSTOMER')")
  */
 class CategoryController extends Controller
@@ -29,6 +29,9 @@ class CategoryController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $response = array();
+
+            /** @var $category CategoryTask */
             $category = $form->getData();
 
             $category->setStatus(1);
@@ -38,24 +41,44 @@ class CategoryController extends Controller
             $errors = $validator->validate($category);
             if (count($errors) === 0) {
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($category);
-                $em->flush();
-                $this->addFlash(
-                    'success',
-                    'Added new category!'
-                );
-                return $this->redirectToRoute('new_category');
+
+                try {
+                    $em->persist($category);
+                    $em->flush();
+
+                    $response = array(
+                        'message' => $this->get('translator')->trans('category.added_new <i>%name%</i>', array('%name%' => $category->getName())),
+                        'status' => 1,
+                        'content' => ''
+                    );
+                } catch (\Exception $e) {
+                    $response = array(
+                        'message' => $this->get('translator')->trans('category.something_wrong'),
+                        'status' => 0,
+                        'content' => ''
+                    );
+                }
             } else {
-                $this->addFlash(
-                    'error',
-                    'Invalid category data!'
+                $response = array(
+                    'message' => $this->get('translator')->trans('category.invalid_data'),
+                    'status' => 0,
+                    'content' => ''
                 );
             }
+            return new JsonResponse($response);
         }
 
-        return $this->render('MKAppBundle::category/new.html.twig', array(
+        $render = $this->render('MKAppBundle::category/new-category.html.twig', array(
             'form' => $form->createView(),
         ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+
+        return new JsonResponse($response);
     }
 
     /**
