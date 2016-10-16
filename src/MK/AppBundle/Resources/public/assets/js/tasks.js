@@ -58,13 +58,14 @@ jQuery(function () {
             var $this = jQuery(this);
             $this.button('loading');
 
+
+            currentCategoryBox = jQuery(this).parents('.home-category-box');
+
             if ($this.hasClass('edit-task')) {
                 hideShowH4('h4-edit');
             } else {
                 hideShowH4('h4-add');
             }
-
-            currentCategoryBox = jQuery(this).parents('.home-category-box');
 
             jQuery.ajax({
                 url: action,
@@ -131,5 +132,7 @@ jQuery(function () {
             jQuery('.h4-edit').hide();
             jQuery('.h4-add').show();
         }
+        var name = jQuery(currentCategoryBox).find('h3 span').text();
+        jQuery('.h4-add span, .h4-edit span').text(name);
     }
 });

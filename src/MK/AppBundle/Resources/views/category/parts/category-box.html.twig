@@ -1,5 +1,7 @@
 <h3>
-    {{ category.name }}
+    <span>
+        {{ category.name }}
+    </span>
     <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
             data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
             data-action="{{ url('new_task') }}" data-category="{{ category.id }}">
@@ -18,8 +20,10 @@
                        {% endif %}
                     </em>
                 </span>
-            <span data-action="{{ path('edit_task', {'id':task.id}) }}" data-category="{{ category.id }}" class="glyphicon glyphicon-pencil pull-right edit-task"></span>
-            <span data-action="{{ path('task_done', {'id':task.id}) }}" class="glyphicon glyphicon-ok pull-right action-done"></span>
+            <span data-action="{{ path('edit_task', {'id':task.id}) }}" data-category="{{ category.id }}"
+                  class="glyphicon glyphicon-pencil pull-right edit-task"></span>
+            <span data-action="{{ path('task_done', {'id':task.id}) }}"
+                  class="glyphicon glyphicon-ok pull-right action-done"></span>
         </a>
         {% if loop.index == 5 %}
             {% set break = 1 %}
