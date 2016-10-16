@@ -6,16 +6,10 @@
 
 <div class="form-group">
     {{ form_label(form.color) }}
-    <div class="input-group colorpicker-component colorpicker-input">
-        {{ form_widget(form.color, {   'attr': {'class': 'form-control', 'value': '$265a88', 'readonly':'readonly', 'placeholder':'form.category.color'|trans} }) }}
-        <span class="input-group-addon"><i></i></span>
-    </div>
+    {{ form_widget(form.color, {   'attr': {'class': 'form-control', 'placeholder':'form.category.color'|trans} }) }}
 </div>
 <div class="form-group">
     {{ form_label(form.reminder) }}
     {{ form_widget(form.reminder) }}
-</div>
-<div class="form-group">
-    {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
 </div>
 {{ form_end(form) }}

@@ -8,7 +8,9 @@
         </button>
     </h3>
     <div class="list-group">
+        {% set count = 0 %}
         {% for key, task in tasks %}
+            {% set count = count + 1 %}
             <a href="#" class="list-group-item list-group-item-info">
                 {{ task.title|truncate(25, true) }}
                 <span class="text-muted small">
@@ -22,11 +24,19 @@
                 <span class="glyphicon glyphicon-ok pull-right"></span>
             </a>
         {% endfor %}
-        <a href="{{ path('show_category', {'id':category.id}) }}" class="list-group-item list-group-item-info active">
-            <strong>
-                Zobacz więcej zadań
-            </strong>
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-        </a>
+        {% if count >= 5 %}
+            <a href="{{ path('show_category', {'id':category.id}) }}"
+               class="list-group-item list-group-item-info active">
+                <strong>
+                    Zobacz więcej zadań
+                </strong>
+                <span class="glyphicon glyphicon-chevron-right pull-right"></span>
+            </a>
+        {% endif %}
+        {% if category.tasks|length == 0 %}
+            <p>
+                Brak zadań...
+            </p>
+        {% endif %}
     </div>
 {% endblock %}

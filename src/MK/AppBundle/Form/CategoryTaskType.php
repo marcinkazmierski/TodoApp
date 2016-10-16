@@ -3,6 +3,7 @@ namespace MK\AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -14,9 +15,15 @@ class CategoryTaskType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array('label' => "Category title"))
-            ->add('color', TextType::class, array('label' => 'Choose color'))
-            ->add('reminder', CheckboxType::class, array('label' => 'Auto reminder?', 'required'=>false))
-            ->add('save', SubmitType::class, array('label' => 'Add category'));
+            ->add('color', ChoiceType::class, array('label' => 'Choose color', 'choices' => array(
+                'Default' => 'default',
+                'Info' => 'info',
+                'Success' => 'success',
+                'Warning' => 'warning',
+                'Danger' => 'danger',
+                'Primary' => 'primary',
+            )))
+            ->add('reminder', CheckboxType::class, array('label' => 'Auto reminder?', 'required' => false));
     }
 
     public function configureOptions(OptionsResolver $resolver)

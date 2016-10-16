@@ -2,6 +2,7 @@ jQuery(function () {
 
     var currentCategoryBox = false;
 
+    /** Task and catgories */
     jQuery('.action-submit').click(function () {
         var $this = jQuery(this);
         $this.button('loading');
@@ -15,7 +16,7 @@ jQuery(function () {
         }).done(function (data) {
             $this.button('reset');
             if (data.status == 1) {
-                var modal = $('#addNewTask');
+                var modal = $('.modal-form');
                 createAlert(data.message);
                 loadTasksBox(currentCategoryBox);
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
@@ -28,9 +29,12 @@ jQuery(function () {
         return false;
     });
 
-    jQuery('.home-category-box').each(function () {
-        loadTasksBox(this);
-    });
+    loadCategories();
+
+    function loadCategories() {
+        loadTasksBox('.home-categories');
+    }
+
 
     function loadTasksBox(el) {
         var action = jQuery(el).attr('data-action');

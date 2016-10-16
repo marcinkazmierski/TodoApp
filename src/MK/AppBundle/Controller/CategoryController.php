@@ -4,6 +4,7 @@ namespace MK\AppBundle\Controller;
 
 use MK\AppBundle\Entity\CategoryTask;
 use MK\AppBundle\Form\CategoryTaskType;
+use MK\AppBundle\Repository\CategoryTaskRepository;
 use MK\AppBundle\Repository\TaskRepository;
 use MK\AppBundle\Utils\CategoryTaskPermissions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -87,19 +88,20 @@ class CategoryController extends Controller
     public function allAction(Request $request)
     {
         $currentUser = $this->getUser();
-        $query = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask')->queryAll($currentUser);
+        /** @var $repository CategoryTaskRepository */
+        $repository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
+        $categories = $repository->queryAll($currentUser);
 
-        $paginator = $this->get('knp_paginator');
-
-        $categories = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5
-        );
-
-        return $this->render('MKAppBundle::category/all.html.twig', array(
+        $render = $this->render('MKAppBundle::category/all.html.twig', array(
             'categories' => $categories
         ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+        return new JsonResponse($response);
     }
 
     /**
