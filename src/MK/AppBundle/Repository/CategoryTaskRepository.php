@@ -14,7 +14,7 @@ class CategoryTaskRepository extends EntityRepository
             ->from('MKAppBundle:CategoryTask', 'c')
             ->where('c.status > 0')
             ->andWhere('c.user = :user')
-            ->orderBy('c.name', 'ASC')
+            ->orderBy('c.id', 'ASC')
             ->setParameter('user', $user);
         return $queryBuilder;
     }

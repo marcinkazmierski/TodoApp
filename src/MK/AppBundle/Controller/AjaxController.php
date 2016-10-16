@@ -44,26 +44,13 @@ class AjaxController extends Controller
             $em->persist($task);
             $em->flush();
 
-            $page = $request->request->get('page');
-
-            $action = '';
-            if ($page === 'show_task') {
-                $action = 'reload';
-
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans('ajax.task_done')
-                );
-            }
-
             $response = array(
                 'message' => $this->get('translator')->trans('ajax.task_done'),
                 'status' => 1,
-                'action' => $action
             );
         }
 
-        return new JsonResponse($response, Response::HTTP_OK);
+        return new JsonResponse($response);
     }
 
 

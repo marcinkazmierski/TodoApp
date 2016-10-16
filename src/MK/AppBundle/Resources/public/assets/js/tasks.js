@@ -20,9 +20,9 @@ jQuery(function () {
                 createAlert(data.message);
                 loadTasksBox(currentCategoryBox);
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
-                alert(data.message);
+                createAlert(data.message, 'danger');
             } else {
-                alert('Error!');
+                createAlert('Error!', 'danger');
             }
             jQuery(modal).modal('hide');
         });
@@ -49,7 +49,6 @@ jQuery(function () {
             }
         });
     }
-
 
     function bindAddNewTask(el) {
         jQuery(el).find('.add-new-task').click(function () {
@@ -89,9 +88,28 @@ jQuery(function () {
                         }
                     });
                 } else if (data.status == 0 && typeof data.message !== 'undefined') {
-                    alert(data.message);
+                    createAlert(data.message, 'danger');
                 } else {
-                    alert('Error!');
+                    createAlert('Error!', 'danger');
+                }
+            });
+            return false;
+        });
+
+        jQuery(el).find('.action-done').click(function () {
+            var action = jQuery(this).attr('data-action');
+            currentCategoryBox = jQuery(this).parents('.home-category-box');
+            jQuery.ajax({
+                url: action,
+                method: 'POST'
+            }).done(function (data) {
+                if (data.status == 1) {
+                    // createAlert(data.message);
+                    loadTasksBox(currentCategoryBox);
+                } else if (data.status == 0 && typeof data.message !== 'undefined') {
+                    createAlert(data.message, 'danger');
+                } else {
+                    createAlert('Error!', 'danger');
                 }
             });
             return false;

@@ -1,46 +1,5 @@
 {% for key, category in categories %}
     <div class="col-sm-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
-        <h3>
-            {{ category.name }}
-            <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
-                    data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
-                    data-action="{{ url('new_task') }}" data-category="{{ category.id }}">
-                Dodaj nowe zadanie
-            </button>
-        </h3>
-        <div class="list-group">
-            {% set break = 0 %}
-            {% for key, task in category.tasks if break == 0 %}
-                <a href="#" class="list-group-item list-group-item-info">
-                    {{ task.title|truncate(25, true) }}
-                    <span class="text-muted small">
-                    <em>
-                       {% if  task.deadline is not null %}
-                           {{ task.deadline|date('Y-m-d H:i:s') }}
-                       {% endif %}
-                    </em>
-                </span>
-                    <span class="glyphicon glyphicon-pencil pull-right"></span>
-                    <span class="glyphicon glyphicon-ok pull-right"></span>
-                </a>
-                {% if loop.index == 5 %}
-                    {% set break = 1 %}
-                {% endif %}
-            {% endfor %}
-            {% if break == 1 %}
-                <a href="{{ path('show_category', {'id':category.id}) }}"
-                   class="list-group-item list-group-item-info active">
-                    <strong>
-                        Zobacz więcej zadań
-                    </strong>
-                    <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-                </a>
-            {% endif %}
-            {% if category.tasks|length == 0 %}
-                <p>
-                    Brak zadań...
-                </p>
-            {% endif %}
-        </div>
+        {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
     </div>
 {% endfor %}
