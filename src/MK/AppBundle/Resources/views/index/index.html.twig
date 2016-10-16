@@ -14,7 +14,10 @@
                 &nbsp;
             </h3>
             <div class="home-add-category text-center">
-                <button type="button" class="btn btn-default btn-lg">
+
+                <button type="button" class="btn btn-default btn-lg add-new-category"
+                        data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
+                        data-action="{{ url('new_category') }}">
                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                     Dodaj nową kategorię
                 </button>
@@ -25,4 +28,10 @@
     <!-- Modals -->
     {% include 'MKAppBundle:_modals:new-task.html.twig' %}
     {% include 'MKAppBundle:_modals:new-category.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/mkapp/assets/js/tasks.js') }}"></script>
+    <script src="{{ asset('bundles/mkapp/assets/js/categories.js') }}"></script>
 {% endblock %}
