@@ -125,11 +125,12 @@ class TaskController extends Controller
         }
 
         $form = $this->createForm(TaskType::class, $task, array('user' => $this->getUser()));
-        $form->add('save', SubmitType::class, array('label' => 'Save'));
 
-        $form->add('deadline', TextType::class, array(
-            'data' => $task->getDeadline()->format('d.m.Y H:i')
-        ));
+        if ($task->getDeadline()) {
+            $form->add('deadline', TextType::class, array(
+                'data' => $task->getDeadline()->format('d.m.Y H:i')
+            ));
+        }
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -144,22 +145,43 @@ class TaskController extends Controller
                 }
                 $category = $task->getCategory();
                 $em = $this->getDoctrine()->getManager();
-                $em->persist($task);
-                $em->persist($category);
-                $em->flush();
+                try {
+                    $em->persist($task);
+                    $em->persist($category);
+                    $em->flush();
 
-                $this->addFlash(
-                    'success',
-                    $this->get('translator')->trans('task.edit_success')
+                    $response = array(
+                        'message' => $this->get('translator')->trans('task.edit_success'),
+                        'status' => 1,
+                        'content' => ''
+                    );
+                } catch (\Exception $e) {
+                    $response = array(
+                        'message' => $this->get('translator')->trans('task.something_wrong'),
+                        'status' => 0,
+                        'content' => ''
+                    );
+                }
+            } else {
+                $response = array(
+                    'message' => $this->get('translator')->trans('task.invalid_data'),
+                    'status' => 0,
+                    'content' => ''
                 );
-
-                return $this->redirectToRoute('show_task', array('id' => $task->getId()));
             }
+            return new JsonResponse($response);
         }
-        return $this->render('MKAppBundle::task/edit.html.twig', array(
-            'task' => $task,
+        $render = $this->render('MKAppBundle::task/edit.html.twig', array(
             'form' => $form->createView(),
         ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+
+        return new JsonResponse($response);
     }
 
     /**

@@ -18,7 +18,7 @@
                        {% endif %}
                     </em>
                 </span>
-            <span class="glyphicon glyphicon-pencil pull-right"></span>
+            <span data-action="{{ path('edit_task', {'id':task.id}) }}" data-category="{{ category.id }}" class="glyphicon glyphicon-pencil pull-right edit-task"></span>
             <span data-action="{{ path('task_done', {'id':task.id}) }}" class="glyphicon glyphicon-ok pull-right action-done"></span>
         </a>
         {% if loop.index == 5 %}

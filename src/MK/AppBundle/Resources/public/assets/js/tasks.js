@@ -51,11 +51,18 @@ jQuery(function () {
     }
 
     function bindAddNewTask(el) {
-        jQuery(el).find('.add-new-task').click(function () {
+        jQuery(el).find('.add-new-task, .edit-task').click(function () {
+
             var action = jQuery(this).attr('data-action');
             var category = jQuery(this).attr('data-category');
             var $this = jQuery(this);
             $this.button('loading');
+
+            if ($this.hasClass('edit-task')) {
+                hideShowH4('h4-edit');
+            } else {
+                hideShowH4('h4-add');
+            }
 
             currentCategoryBox = jQuery(this).parents('.home-category-box');
 
@@ -79,7 +86,7 @@ jQuery(function () {
                     });
                     tinymce.remove();
                     tinymce.init({
-                        selector: '#addNewTask textarea',
+                        selector: '.modal-form textarea',
                         menubar: false,
                         setup: function (editor) {
                             editor.on('change', function () {
@@ -114,5 +121,15 @@ jQuery(function () {
             });
             return false;
         });
+    }
+
+    function hideShowH4(action) {
+        if (action != 'h4-add') {
+            jQuery('.h4-edit').show();
+            jQuery('.h4-add').hide();
+        } else {
+            jQuery('.h4-edit').hide();
+            jQuery('.h4-add').show();
+        }
     }
 });
