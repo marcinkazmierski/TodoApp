@@ -3,17 +3,15 @@
 {% block content %}
     <div class="row">
         <div class="col-sm-4">
-                <button type="button" class="btn btn-default add-new-category"
-                        data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
-                        data-action="{{ url('new_category') }}">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
-                    Dodaj nową kategorię
-                </button>
+            <button type="button" class="btn btn-default add-new-category"
+                    data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
+                    data-action="{{ url('new_category') }}">
+                <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                Dodaj nową kategorię
+            </button>
         </div>
     </div>
-    <div data-action="{{ url('all_categories') }}" class="row home-categories match-my-cols">
-
-    </div>
+    <div data-action="{{ url('all_categories') }}" class="row home-categories"></div>
 
     <!-- Modals -->
     {% include 'MKAppBundle:_modals:new-task.html.twig' %}

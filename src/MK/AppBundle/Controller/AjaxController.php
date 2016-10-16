@@ -123,7 +123,7 @@ class AjaxController extends Controller
                 );
             }
         }
-        return new JsonResponse($response, Response::HTTP_OK);
+        return new JsonResponse($response);
     }
 
     /**

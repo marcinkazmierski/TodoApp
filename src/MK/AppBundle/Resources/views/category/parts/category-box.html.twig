@@ -1,7 +1,13 @@
-<h3>
-    <span>
+<h3 class="category-box-name">
+    <span class="name">
         {{ category.name }}
     </span>
+
+    <span data-action="{{ path('edit_category', {'id':category.id}) }}"
+          class="glyphicon glyphicon-pencil edit-category"></span>
+    <span data-action="{{ path('category_delete', {'id':category.id}) }}"
+          class="glyphicon glyphicon-trash delete-category"></span>
+
     <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
             data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
             data-action="{{ url('new_task') }}" data-category="{{ category.id }}">

@@ -132,7 +132,7 @@ jQuery(function () {
             jQuery('.h4-edit').hide();
             jQuery('.h4-add').show();
         }
-        var name = jQuery(currentCategoryBox).find('h3 span').text();
+        var name = jQuery(currentCategoryBox).find('h3 span.name').text();
         jQuery('.h4-add span, .h4-edit span').text(name);
     }
 });

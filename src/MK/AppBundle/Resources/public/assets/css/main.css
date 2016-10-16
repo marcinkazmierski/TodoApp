@@ -50,7 +50,8 @@ body {
 }
 
 .user-profile-wrapper .row {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .main-container {
@@ -63,8 +64,8 @@ body {
     margin-left: 4px;
 }
 
-.home-categories .list-group .glyphicon:hover,
-.home-categories .list-group .glyphicon:focus {
+.home-categories .glyphicon:hover,
+.home-categories .glyphicon:focus {
     background-color: #f9f9f9;
 }
 
@@ -81,4 +82,23 @@ body {
     padding-top: 40px;
 }
 
+h3.category-box-name {
+    display: inline-block;
+    width: 100%;
+}
 
+h3.category-box-name .glyphicon {
+    cursor: pointer;
+    font-size: 12px;
+    margin: 0;
+}
+
+.home-category-box .list-group > a {
+    display: inline-block;
+    width: 100%;
+}
+
+.bg-white {
+    background: #fff;
+    border-radius: 2px;
+}
