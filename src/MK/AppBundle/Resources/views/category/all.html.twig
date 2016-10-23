@@ -1,5 +1,19 @@
 {% for key, category in categories %}
+    {% if (loop.index - 1) is divisibleby(3) %}
+    {% if loop.index > 1 %}
+        </div>
+        </div>
+    {% endif %}
+        <div class="col-sm-12">
+        <div class="row match-my-cols">
+    {% endif %}
     <div class="col-sm-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
         {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
     </div>
 {% endfor %}
+
+
+</div>
+</div>
+
+

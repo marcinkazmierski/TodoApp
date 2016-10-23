@@ -93,6 +93,17 @@ h3.category-box-name .glyphicon {
 .home-category-box .list-group > a {
     display: inline-block;
     width: 100%;
+    cursor: default;
+}
+
+.home-category-box .list-group > a span {
+    cursor: pointer;
+}
+
+.home-category-box p.empty-tasks {
+    background: #fff;
+    border-radius: 2px;
+    padding: 10px 15px;
 }
 
 .bg-white {

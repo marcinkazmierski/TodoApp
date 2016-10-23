@@ -18,7 +18,11 @@ jQuery(function () {
             if (data.status == 1) {
                 var modal = $('.modal-form');
                 createAlert(data.message);
-                loadTasksBox(currentCategoryBox);
+                if (currentCategoryBox == false || currentCategoryBox == undefined) {
+                    loadCategories();
+                } else {
+                    loadTasksBox(currentCategoryBox);
+                }
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
                 createAlert(data.message, 'danger');
             } else {
@@ -48,6 +52,7 @@ jQuery(function () {
                 bindAddNewTask($this);
             }
         });
+        currentCategoryBox = false;
     }
 
     function bindAddNewTask(el) {
