@@ -5,13 +5,12 @@
         </div>
     {% endif %}
         <div class="col-sm-12">
-        <div class="row match-my-cols">
+        <div class="row">
     {% endif %}
     <div class="col-sm-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
         {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
     </div>
 {% endfor %}
-
 
 </div>
 </div>
