@@ -141,7 +141,6 @@ class CategoryController extends Controller
         }
 
         $form = $this->createForm(CategoryTaskType::class, $category);
-        $form->add('save', SubmitType::class, array('label' => 'Save'));
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -151,26 +150,43 @@ class CategoryController extends Controller
             $validator = $this->get('validator');
             $errors = $validator->validate($category);
             if (count($errors) === 0) {
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($category);
-                $em->flush();
-                $this->addFlash(
-                    'success',
-                    'Updated category!'
-                );
-                return $this->redirectToRoute('edit_category', array('id' => $category->getId()));
+                try {
+                    $em = $this->getDoctrine()->getManager();
+                    $em->persist($category);
+                    $em->flush();
+
+                    $response = array(
+                        'message' => $this->get('translator')->trans('category.edit_success'),
+                        'status' => 1,
+                        'content' => ''
+                    );
+                } catch (\Exception $e) {
+                    $response = array(
+                        'message' => $this->get('translator')->trans('category.something_wrong'),
+                        'status' => 0,
+                        'content' => ''
+                    );
+                }
             } else {
-                $this->addFlash(
-                    'error',
-                    'Invalid category data!'
+                $response = array(
+                    'message' => $this->get('translator')->trans('category.invalid_data'),
+                    'status' => 0,
+                    'content' => ''
                 );
             }
+            return new JsonResponse($response);
         }
 
-        return $this->render('MKAppBundle::category/edit.html.twig', array(
-            'category' => $category,
+        $render = $this->render('MKAppBundle::category/new-category.html.twig', array(
             'form' => $form->createView(),
         ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+        return new JsonResponse($response);
     }
 
     /**
