@@ -4,6 +4,7 @@ namespace MK\AppBundle\Controller;
 
 use MK\AppBundle\Entity\CategoryTask;
 use MK\AppBundle\Entity\Task;
+use MK\AppBundle\Repository\TaskRepository;
 use MK\AppBundle\Utils\CategoryTaskPermissions;
 use MK\AppBundle\Utils\TaskPermissions;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -107,7 +108,11 @@ class AjaxController extends Controller
                 'status' => 0,
             );
         } else {
-            if (count($category->getTasks()) > 0) {
+            /** @var $taskRepository TaskRepository */
+            $taskRepository = $this->getDoctrine()->getRepository('MKAppBundle:Task');
+            $results = $taskRepository->allFromCategory($this->getUser(), $category, 1);
+
+            if (count($results) > 0) {
                 $response = array(
                     'message' => $this->get('translator')->trans('ajax.category_delete_have_tasks'),
                     'status' => 0,

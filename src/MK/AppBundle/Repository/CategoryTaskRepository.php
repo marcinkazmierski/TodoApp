@@ -24,6 +24,4 @@ class CategoryTaskRepository extends EntityRepository
         $results = $this->queryAllBuilder($user)->getQuery()->getResult(); // HYDRATE_ARRAY -> as array results
         return $results;
     }
-
-
 }
