@@ -14,12 +14,9 @@ body {
     margin-top: 15px;
 }
 
-#wrapper .critical-item {
-    background: #FCCCCC;
-}
-
-#wrapper .critical-item > span {
+.critical-item {
     font-weight: bold;
+    color: #A21B1B;
 }
 
 .icon-link-action, .icon-link-action:hover, .icon-link-action:active, .icon-link-action:focus {
