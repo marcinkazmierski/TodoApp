@@ -110,3 +110,12 @@ h3.category-box-name .glyphicon {
     background: #fff;
     border-radius: 2px;
 }
+
+.footer p.text-muted {
+    color: #111;
+}
+
+.footer p.text-muted a, .footer p.text-muted a:hover, .footer p.text-muted a:focus {
+    color: #111;
+    font-weight: 600;
+}
