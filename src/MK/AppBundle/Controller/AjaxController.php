@@ -130,16 +130,4 @@ class AjaxController extends Controller
         }
         return new JsonResponse($response);
     }
-
-    /**
-     * Parse request data.
-     */
-    private function parseRequest(Request $request)
-    {
-        $data = $request->request->all();
-        if (!is_array($data) || empty($data)) {
-            return false;
-        }
-        return $data;
-    }
 }

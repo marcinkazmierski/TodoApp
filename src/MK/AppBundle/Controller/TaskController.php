@@ -92,26 +92,6 @@ class TaskController extends Controller
         return new JsonResponse($response);
     }
 
-    /**
-     * @Route("/all", name="all_tasks")
-     */
-    public function allAction(Request $request)
-    {
-        $currentUser = $this->getUser();
-        $query = $this->getDoctrine()->getRepository('MKAppBundle:Task')->queryAll($currentUser);
-
-        $paginator = $this->get('knp_paginator');
-
-        $tasks = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5
-        );
-
-        return $this->render('MKAppBundle::task/all.html.twig', array(
-            'tasks' => $tasks
-        ));
-    }
 
     /**
      * @Route("/{id}/edit", name="edit_task")
@@ -182,43 +162,5 @@ class TaskController extends Controller
         );
 
         return new JsonResponse($response);
-    }
-
-    /**
-     * @Route("/archives", name="archives_tasks")
-     */
-    public function archivesAction(Request $request)
-    {
-        $currentUser = $this->getUser();
-        $query = $this->getDoctrine()->getRepository('MKAppBundle:Task')->queryAll($currentUser, 2);
-
-        $paginator = $this->get('knp_paginator');
-
-        $tasks = $paginator->paginate(
-            $query,
-            $request->query->getInt('page', 1),
-            5
-        );
-
-        return $this->render('MKAppBundle::task/archives.html.twig', array(
-            'tasks' => $tasks
-        ));
-    }
-
-
-    /**
-     * @Route("/{id}/show", name="show_task")
-     */
-    public function showAction(Request $request, Task $task)
-    {
-        $tp = new TaskPermissions();
-
-        if (!$tp->isTaskAuthor($task, $this->getUser())) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('access.denied.text'));
-        }
-
-        return $this->render('MKAppBundle::task/show.html.twig', array(
-            'task' => $task
-        ));
     }
 }

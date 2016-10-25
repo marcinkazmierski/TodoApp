@@ -104,30 +104,6 @@ class CategoryController extends Controller
         return new JsonResponse($response);
     }
 
-    /**
-     * @Route("/{id}", name="show_category")
-     */
-    public function showAction(Request $request, CategoryTask $category)
-    {
-        $tc = new CategoryTaskPermissions();
-
-        if (!$tc->isCategoryTaskAuthor($category, $this->getUser())) {
-            throw $this->createAccessDeniedException($this->get('translator')->trans('access.denied.text'));
-        }
-
-        $currentUser = $this->getUser();
-        $results = $this->getDoctrine()->getRepository('MKAppBundle:Task')->allFromCategory($currentUser, $category);
-        $paginator = $this->get('knp_paginator');
-        $tasks = $paginator->paginate(
-            $results,
-            $request->query->getInt('page', 1),
-            5
-        );
-
-        return $this->render('MKAppBundle::category/showTasks.html.twig', array(
-            'tasks' => $tasks
-        ));
-    }
 
     /**
      * @Route("/{id}/edit", name="edit_category")
