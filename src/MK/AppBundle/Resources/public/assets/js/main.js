@@ -1,5 +1,5 @@
 jQuery(function () {
-
+    AddEditCategory('.index-main-wrapper');
 });
 
 var currentCategoryBox = false;
@@ -129,6 +129,22 @@ function bindAddNewTask(el) {
         return false;
     });
 
+    AddEditCategory(el);
+}
+
+function hideShowH4(action) {
+    if (action != 'h4-add') {
+        jQuery('.h4-edit').show();
+        jQuery('.h4-add').hide();
+    } else {
+        jQuery('.h4-edit').hide();
+        jQuery('.h4-add').show();
+    }
+    var name = jQuery(currentCategoryBox).find('h3 span.name').text();
+    jQuery('.h4-add span, .h4-edit span').text(name);
+}
+
+function AddEditCategory(el) {
     jQuery(el).find('.add-new-category, .edit-category').click(function () {
         var action = jQuery(this).attr('data-action');
 
@@ -162,16 +178,4 @@ function bindAddNewTask(el) {
         });
         return false;
     });
-}
-
-function hideShowH4(action) {
-    if (action != 'h4-add') {
-        jQuery('.h4-edit').show();
-        jQuery('.h4-add').hide();
-    } else {
-        jQuery('.h4-edit').hide();
-        jQuery('.h4-add').show();
-    }
-    var name = jQuery(currentCategoryBox).find('h3 span.name').text();
-    jQuery('.h4-add span, .h4-edit span').text(name);
 }
