@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ConstraintPhone extends Constraint
 {
-    public $message = 'The string "%string%" contains an illegal character: it can only contain letters or numbers.';
+    public $message = 'Invalid phone number: the string "%string%" contains an illegal character: it can only contain letters or numbers.';
 
     public function validatedBy()
     {

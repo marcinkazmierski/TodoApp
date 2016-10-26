@@ -1,4 +1,9 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/mkapp/assets/css/login.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_classes_names %}login-page{% endblock %}
 
 {% block fos_user_content %}
@@ -34,6 +39,13 @@
                         {{ form_errors(form.plainPassword.second)|striptags|trans }}
                     </div>
                 {% endif %}
+                {% if form_errors(form) %}
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        {{ form_errors(form)|striptags|trans }}
+                    </div>
+                {% endif %}
             {% endautoescape %}
         </div>
     {% endif %}
@@ -62,9 +74,9 @@
 
 
 
-        <button name="action" class="btn btn-lg btn-primary btn-block" type="submit">
-            {{ 'registration.submit'|trans }}
-        </button>
+    <button name="action" class="btn btn-lg btn-primary btn-block" type="submit">
+        {{ 'registration.submit'|trans }}
+    </button>
 
     {{ form_end(form) }}
 
