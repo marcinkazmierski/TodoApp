@@ -56,8 +56,9 @@
         <img src="{{ asset('bundles/mkapp/assets/img/logo.png') }}" class="img-responsive" alt="Cinque Terre">
     </div>
 
-    <h2 class="form-signin-heading">Registration</h2>
-
+    <h2 class="form-signin-heading">
+        Registration
+    </h2>
 
     {{ form_label(form.username, null, {'label_attr': {'class': 'sr-only'}}) }}
     {{ form_widget(form.username, {   'attr': {'class': 'form-control first', 'placeholder':'form.username'|trans} }) }}
@@ -70,9 +71,6 @@
 
     {{ form_label(form.plainPassword.second, null, {'label_attr': {'class': 'sr-only'}}) }}
     {{ form_widget(form.plainPassword.second, {   'attr': {'class': 'form-control last', 'placeholder':'form.password_confirmation'|trans} }) }}
-
-
-
 
     <button name="action" class="btn btn-lg btn-primary btn-block" type="submit">
         {{ 'registration.submit'|trans }}
