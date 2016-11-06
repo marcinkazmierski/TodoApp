@@ -34,6 +34,10 @@ security:
             logout:
                 path:   fos_user_security_logout
                 target: fos_user_security_login
+            remember_me:
+                secret:   '%secret%'
+                lifetime: 2592000 # 1 month in seconds
+                path:     /
 
     encoders:
             MK\AppBundle\Entity\User:
