@@ -1,5 +1,6 @@
 jQuery(function () {
     AddEditCategory('.index-main-wrapper');
+    contact();
 });
 
 var currentCategoryBox = false;
@@ -174,6 +175,45 @@ function AddEditCategory(el) {
                 alert(data.message);
             } else {
                 alert('Error!');
+            }
+        });
+        return false;
+    });
+}
+
+function contact() {
+    jQuery('a.contact-modal').click(function () {
+
+        var action = jQuery(this).attr('data-action');
+        var $this = jQuery(this);
+        $this.button('loading');
+
+        jQuery.ajax({
+            url: action,
+            method: 'GET'
+        }).done(function (data) {
+            $this.button('reset');
+            if (data.status == 1) {
+                var modal = $('#contactModal');
+                var content = data.content;
+                jQuery(modal).find('.modal-body').html(content);
+                jQuery(modal).find('.action-submit').attr('data-action', action);
+                jQuery(modal).modal('show');
+
+                tinymce.remove();
+                tinymce.init({
+                    selector: '.modal-form textarea',
+                    menubar: false,
+                    setup: function (editor) {
+                        editor.on('change', function () {
+                            editor.save();
+                        });
+                    }
+                });
+            } else if (data.status == 0 && typeof data.message !== 'undefined') {
+                createAlert(data.message, 'danger');
+            } else {
+                createAlert('Error!', 'danger');
             }
         });
         return false;

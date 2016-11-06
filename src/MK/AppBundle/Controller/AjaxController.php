@@ -4,6 +4,7 @@ namespace MK\AppBundle\Controller;
 
 use MK\AppBundle\Entity\CategoryTask;
 use MK\AppBundle\Entity\Task;
+use MK\AppBundle\Form\ContactType;
 use MK\AppBundle\Repository\TaskRepository;
 use MK\AppBundle\Utils\CategoryTaskPermissions;
 use MK\AppBundle\Utils\TaskPermissions;
@@ -128,6 +129,35 @@ class AjaxController extends Controller
                 );
             }
         }
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/contact",  name="ajax_contact")
+     */
+    public function contactAction(Request $request)
+    {
+        $form = $this->createForm(ContactType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $data = $form->getData();
+                // TODO
+                // http://www.lucas.courot.com/how-to-create-a-contact-form-using-symfony2.html
+            }
+        }
+
+        $render = $this->render('MKAppBundle::ajax/contact.html.twig', array(
+            'form' => $form->createView()
+        ));
+
+        $response = array(
+            'message' => '',
+            'status' => 1,
+            'content' => $render->getContent()
+        );
+
         return new JsonResponse($response);
     }
 }

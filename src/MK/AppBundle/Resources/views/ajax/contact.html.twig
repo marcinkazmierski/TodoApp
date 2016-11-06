@@ -1,0 +1,21 @@
+{{ form_start(form) }}
+<div>
+    {{ form_errors(form) }}
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_widget(form.subject, {   'attr': {'class': 'form-control', 'placeholder':'form.contact.subject'|trans} }) }}
+            {{ form_errors(form.subject) }}
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-group">
+            {{ form_widget(form.message, {   'attr': {'class': 'form-control'}}) }}
+            {{ form_errors(form.message) }}
+        </div>
+    </div>
+
+{{ form_end(form) }}
