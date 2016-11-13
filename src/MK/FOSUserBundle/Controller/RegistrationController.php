@@ -6,6 +6,7 @@ namespace MK\FOSUserBundle\Controller;
 use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
+use MK\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\UserBundle\Controller\RegistrationController as BaseController;
 
@@ -21,6 +22,7 @@ class RegistrationController extends BaseController
         /** @var $dispatcher \Symfony\Component\EventDispatcher\EventDispatcherInterface */
         $dispatcher = $this->get('event_dispatcher');
 
+        /** @var $user User */
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
@@ -42,6 +44,9 @@ class RegistrationController extends BaseController
 
             $role = $this->container->getParameter('user_role');
             $user->addRole($role);
+
+            $locale = $request->getLocale();
+            $user->setLocale($locale);
 
             $userManager->updateUser($user);
             $this->addFlash(

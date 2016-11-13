@@ -36,7 +36,7 @@ class MailTemplate
 
         $message = \Swift_Message::newInstance()
             ->setSubject($subject)
-            ->setFrom($this->sender['address'], $this->sender['name'])
+            ->setFrom(array($this->sender['address'] => $this->sender['name']))
             ->setTo($mailTo)
             ->setBody($rendered, 'text/html');
         $result = $this->container->get('mailer')->send($message);

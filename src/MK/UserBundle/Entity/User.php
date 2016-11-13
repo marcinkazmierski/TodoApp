@@ -34,6 +34,11 @@ class User extends BaseUser
      */
     private $phone;
 
+    /**
+     * @ORM\Column(type="string", length=3, nullable=true)
+     */
+    private $locale;
+
     public function __construct()
     {
         parent::__construct();
@@ -129,5 +134,29 @@ class User extends BaseUser
     public function getPhone()
     {
         return $this->phone;
+    }
+
+    /**
+     * Set locale
+     *
+     * @param string $locale
+     *
+     * @return User
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
+
+        return $this;
+    }
+
+    /**
+     * Get locale
+     *
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
     }
 }

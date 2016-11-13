@@ -3,6 +3,8 @@
 namespace MK\UserBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -14,6 +16,10 @@ class ProfileType extends AbstractType
     {
         $builder
             ->add('phone', TextType::class, array('label' => "Phone"))
+            ->add('locale', ChoiceType::class, array('label' => 'Choose locale', 'choices' => array(
+                'Polish' => 'pl',
+                'English' => 'en',
+            )))
             ->add('save', SubmitType::class, array('label' => 'Save'));
     }
 

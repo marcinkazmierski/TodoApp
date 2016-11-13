@@ -86,7 +86,8 @@ fos_user:
     registration:
         confirmation:
             enabled: true
-
+    from_email:
+        sender_name: 'TODOapp'
 
 # KnpPaginatorBundle configuration (used to paginate large result set)
 knp_paginator:

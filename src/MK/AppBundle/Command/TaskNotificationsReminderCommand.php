@@ -57,7 +57,7 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
         $tasks = $taskRepository->findCurrentAllWithReminder();
         $now = new \DateTime();
         $base_domain = $this->getContainer()->getParameter('base_domain');
-
+        $sendTasks = 0;
 
         /** @var $router Router */
         $router = $this->getContainer()->get('router');
@@ -70,8 +70,10 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
                 $output->writeln('Max. runtime reached, exiting...');
                 break;
             }
+            /** @var $user User */
+            $user = $task->getUser();
 
-            $locale = 'pl'; // TODO
+            $locale = $user->getLocale();
             $translator->setLocale($locale);
             $url = $base_domain . $router->generate('edit_task', array('id' => $task->getId(), '_locale' => $locale));
 
@@ -82,7 +84,7 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
             );
 
             $subject = $this->getContainer()->get('translator')->trans('task.reminder.subject');
-            $user = $task->getUser();
+
             $serviceMail->sendMailWithTemplate($subject, $params, $user->getEmail(), 'task-notice');
 
             $phone = $user->getPhone();
@@ -94,8 +96,9 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
             }
             $task->setLastSendNotice($now);
             $this->entityManager->persist($task);
+            $sendTasks++;
         }
-        $output->writeln('Send tasks: ' . count($tasks));
+        $output->writeln('Send tasks: ' . $sendTasks);
 
         $this->entityManager->flush();
         $this->entityManager->clear();
