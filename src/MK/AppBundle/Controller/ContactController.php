@@ -2,34 +2,23 @@
 
 namespace MK\AppBundle\Controller;
 
-use MK\AppBundle\Entity\CategoryTask;
-use MK\AppBundle\Entity\Task;
 use MK\AppBundle\Form\ContactType;
-use MK\AppBundle\Repository\TaskRepository;
-use MK\AppBundle\Utils\CategoryTaskPermissions;
-use MK\AppBundle\Utils\TaskPermissions;
 use MK\MailBundle\Service\MailTemplate;
 use MK\UserBundle\Entity\User;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Class AjaxController
  * @package MK\AppBundle\Controller
- * @Route("/ajax")
+ * @Route("/ajax/contact")
  * @Security("has_role('CUSTOMER')")
  */
-class AjaxController extends Controller
+class ContactController extends Controller
 {
-
-
-
 
     /**
      * @Route("/contact",  name="ajax_contact")

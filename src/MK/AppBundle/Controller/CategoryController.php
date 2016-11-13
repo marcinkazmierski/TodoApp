@@ -10,7 +10,7 @@ use MK\AppBundle\Utils\CategoryTaskPermissions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -166,7 +166,7 @@ class CategoryController extends Controller
     }
 
     /**
-     * @Route("/ajax/{id}", name="show_ajax_category")
+     * @Route("/{id}/show", name="show_ajax_category")
      */
     public function getTasksFromCategoryAction(Request $request, CategoryTask $category)
     {
@@ -192,6 +192,43 @@ class CategoryController extends Controller
             'status' => 1,
             'content' => $render->getContent()
         );
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/{id}/delete",  name="category_delete")
+     * @Method("POST")
+     */
+    public function deleteCategoryAction(Request $request, CategoryTask $category)
+    {
+        $tc = new CategoryTaskPermissions();
+
+        if (!$tc->isCategoryTaskAuthor($category, $this->getUser())) {
+            $response = array(
+                'message' => $this->get('translator')->trans('access.denied.text'),
+                'status' => 0,
+            );
+        } else {
+            /** @var $taskRepository TaskRepository */
+            $taskRepository = $this->getDoctrine()->getRepository('MKAppBundle:Task');
+            $results = $taskRepository->allFromCategory($this->getUser(), $category, 1);
+
+            if (count($results) > 0) {
+                $response = array(
+                    'message' => $this->get('translator')->trans('ajax.category_delete_have_tasks'),
+                    'status' => 0,
+                );
+            } else {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($category);
+                $em->flush();
+
+                $response = array(
+                    'message' => $this->get('translator')->trans('ajax.category_delete_done'),
+                    'status' => 1,
+                );
+            }
+        }
         return new JsonResponse($response);
     }
 }

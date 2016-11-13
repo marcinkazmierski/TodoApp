@@ -30,7 +30,7 @@ class PlusSMSSender
     public function sendSMS($phoneNumber, $body)
     {
         $body = strtr($body, 'ĘÓĄŚŁŻŹĆŃęóąśłżźćń', 'EOASLZZCNeoaslzzcn');
- 
+
         $message = \Swift_Message::newInstance()
             ->setSubject('')
             ->setFrom($this->sender['address'])

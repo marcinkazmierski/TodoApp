@@ -10,13 +10,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/ajax/task")
@@ -162,5 +160,75 @@ class TaskController extends Controller
         );
 
         return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/{id}/done",  name="task_done")
+     * @Method("POST")
+     */
+    public function indexAction(Request $request, Task $task)
+    {
+        $tp = new TaskPermissions();
+
+        if (!$tp->isTaskAuthor($task, $this->getUser())) {
+
+            $response = array(
+                'message' => $this->get('translator')->trans('access.denied.text'),
+                'status' => 0,
+            );
+        } else {
+            $task->setStatus(2);
+            $task->setDoneDate(new \DateTime('now'));
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($task);
+            $em->flush();
+
+            $response = array(
+                'message' => $this->get('translator')->trans('ajax.task_done'),
+                'status' => 1,
+            );
+        }
+
+        return new JsonResponse($response);
+    }
+
+
+    /**
+     * @Route("/{id}/delete",  name="task_delete")
+     * @Method("POST")
+     */
+    public function deleteTaskAction(Request $request, Task $task)
+    {
+        $tp = new TaskPermissions();
+
+        if (!$tp->isTaskAuthor($task, $this->getUser())) {
+
+            $response = array(
+                'message' => $this->get('translator')->trans('access.denied.text'),
+                'status' => 0,
+            );
+        } else {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($task);
+            $em->flush();
+
+            $page = $request->request->get('page');
+
+            $action = '';
+            if ($page === 'show_task') {
+                $action = $this->generateUrl('homepage', array(), UrlGeneratorInterface::ABSOLUTE_URL);
+                $this->addFlash(
+                    'success',
+                    $this->get('translator')->trans('ajax.task_delete_done')
+                );
+            }
+
+            $response = array(
+                'message' => $this->get('translator')->trans('ajax.task_delete_done'),
+                'status' => 1,
+                'action' => $action
+            );
+        }
+        return new JsonResponse($response, Response::HTTP_OK);
     }
 }
