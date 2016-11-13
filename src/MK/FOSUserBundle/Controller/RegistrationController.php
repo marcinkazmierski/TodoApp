@@ -45,7 +45,7 @@ class RegistrationController extends BaseController
             $role = $this->container->getParameter('user_role');
             $user->addRole($role);
 
-            $locale = $request->getLocale();
+              $locale = $request->getLocale();
             $user->setLocale($locale);
 
             $userManager->updateUser($user);
@@ -53,7 +53,7 @@ class RegistrationController extends BaseController
                 'success',
                 $this->get('translator')->trans('registration.check_email', array('%email%' => $user->getEmail()))
             );
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('fos_user_security_login');
         }
 
         return $this->render('FOSUserBundle:Registration:register.html.twig', array(

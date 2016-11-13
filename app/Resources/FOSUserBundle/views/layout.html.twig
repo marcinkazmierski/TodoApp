@@ -1,8 +1,29 @@
 {% extends 'MKAppBundle::base.html.twig' %}
 
 {% block body %}
-    <div class="container">
-        {% block fos_user_content %}
-        {% endblock fos_user_content %}
-    </div> <!-- /container -->
+
+    <div class="flash-messages">
+        {% set flashbag = app.session.flashbag.all() %}
+        {% if flashbag is not empty %}
+                <div class="row margin-top">
+                    <div class="col-sm-12">
+                        {% for type,flash_messages in flashbag %}
+                            {% for message in flash_messages %}
+                                <div class="alert alert-{{ type }}" role="alert">
+                                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                    {{ message|trans }}
+                                </div>
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12">
+            {% block fos_user_content %}
+            {% endblock fos_user_content %}
+        </div>
+    </div>
 {% endblock %}
