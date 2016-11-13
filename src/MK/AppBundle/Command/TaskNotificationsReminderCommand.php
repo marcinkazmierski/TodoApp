@@ -76,8 +76,8 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
 
             $locale = $user->getLocale();
             $translator->setLocale($locale);
-            $url = $base_domain . $router->generate('edit_task', array('id' => $task->getId(), '_locale' => $locale));
-
+            $url = $base_domain . $router->generate('homepage', array('_locale' => $locale));
+    
             $params = array(
                 'title' => $task->getTitle(),
                 'deadline' => $task->getDeadline()->format("d-m-Y H:i"),
