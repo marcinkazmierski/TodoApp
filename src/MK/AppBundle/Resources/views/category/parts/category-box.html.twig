@@ -15,9 +15,8 @@
     </button>
 </h3>
 <div class="list-group">
-    {% set break = 0 %}
     {% set taskCount = 0 %}
-    {% for key, task in category.tasks if task.status == 1 and break == 0 %}
+    {% for key, task in category.tasks if task.status == 1 %}
         {% set taskCount = taskCount + 1 %}
         <a href="#" class="list-group-item list-group-item-{{ category.color }}">
             {{ task.title|truncate(25, true) }}
@@ -33,18 +32,7 @@
             <span data-action="{{ path('task_done', {'id':task.id}) }}"
                   class="glyphicon glyphicon-ok pull-right action-done"></span>
         </a>
-        {% if loop.index == 5 %}
-            {# set break = 1 #}
-        {% endif %}
     {% endfor %}
-    {% if break == 1 %}
-        <a href="#" class="list-group-item list-group-item-{{ category.color }} active">
-            <strong>
-                Zobacz więcej zadań
-            </strong>
-            <span class="glyphicon glyphicon-chevron-right pull-right"></span>
-        </a>
-    {% endif %}
     {% if taskCount == 0 %}
         <p class="empty-tasks">
             Brak zadań...
