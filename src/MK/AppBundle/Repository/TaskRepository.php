@@ -109,7 +109,7 @@ class TaskRepository extends EntityRepository
             ->where('t.status > 0')
             ->andWhere('c.reminder = true')
             ->andWhere('t.deadline <= :deadline')
-            ->andWhere('t.lastSendNotice <= :yesterday')
+            ->andWhere('t.lastSendNotice <= :yesterday OR t.lastSendNotice is NULL')
             ->setParameter('deadline', $today)
             ->setParameter('yesterday', $yesterday)
             ->orderBy('t.deadline', 'ASC');

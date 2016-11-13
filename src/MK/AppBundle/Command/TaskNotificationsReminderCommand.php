@@ -3,6 +3,7 @@
 namespace MK\AppBundle\Command;
 
 use MK\AppBundle\Entity\Task;
+use MK\AppBundle\Repository\TaskRepository;
 use MK\MailBundle\Service\MailTemplate;
 use MK\SMSBundle\Service\PlusSMSSender;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -51,7 +52,9 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
         /** @var $serviceSMS PlusSMSSender */
         $serviceSMS = $this->getContainer()->get('mk_sms_engine.class');
 
-        $tasks = $this->entityManager->getRepository('MKAppBundle:Task')->findCurrentAllWithReminder();
+        /** @var $taskRepository TaskRepository */
+        $taskRepository = $this->entityManager->getRepository('MKAppBundle:Task');
+        $tasks = $taskRepository->findCurrentAllWithReminder();
         $now = new \DateTime();
         $base_domain = $this->getContainer()->getParameter('base_domain');
 
