@@ -1,6 +1,11 @@
 jQuery(function () {
     AddEditCategory('.index-main-wrapper');
     contact();
+    moveFooter();
+});
+
+jQuery(window).resize(function () {
+    moveFooter();
 });
 
 var currentCategoryBox = false;
@@ -37,6 +42,7 @@ function loadTasksBox(el) {
 }
 
 function bindAddNewTask(el) {
+    moveFooter();
     jQuery(el).find('.add-new-task, .edit-task').click(function () {
 
         var action = jQuery(this).attr('data-action');
@@ -98,7 +104,6 @@ function bindAddNewTask(el) {
             method: 'POST'
         }).done(function (data) {
             if (data.status == 1) {
-                // createAlert(data.message);
                 loadTasksBox(currentCategoryBox);
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
                 createAlert(data.message, 'danger');
@@ -218,4 +223,15 @@ function contact() {
         });
         return false;
     });
+}
+
+function moveFooter() {
+    jQuery('footer').css('margin-top', 0);
+    var docHeight = jQuery(window).height();
+    var footerHeight = jQuery('footer').height();
+    var footerTop = jQuery('footer').position().top + footerHeight;
+
+    if (footerTop < docHeight) {
+        jQuery('footer').css('margin-top', (docHeight - footerTop) + 'px');
+    }
 }
