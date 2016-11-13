@@ -37,7 +37,7 @@ class RedirectToPreferredLocaleListener
     /**
      * @var string
      */
-    private $defaultLocale = 'en';
+    private $defaultLocale = 'pl';
 
     /**
      * Constructor.
