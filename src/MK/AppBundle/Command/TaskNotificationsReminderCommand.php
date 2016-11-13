@@ -35,6 +35,7 @@ class TaskNotificationsReminderCommand extends ContainerAwareCommand
     protected function initialize(InputInterface $input, OutputInterface $output)
     {
         $this->entityManager = $this->getContainer()->get('doctrine')->getManager();
+        date_default_timezone_set('Europe/Warsaw');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
