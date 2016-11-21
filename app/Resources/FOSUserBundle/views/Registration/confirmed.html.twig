@@ -1,8 +1,17 @@
 {% extends "FOSUserBundle::layout.html.twig" %}
 
 {% block fos_user_content %}
-    <p>
-        TODO: Added successfully.
-    </p>
-    <a href="{{ path('homepage') }}"> Home </a>
+
+    <div class="container">
+        <div class="row margin-top">
+            <div class="col-sm-12">
+                <div class="alert alert-success" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    {{ 'fos.confirmed.success'|trans }}
+                    <a class="btn btn-success" href="{{ path('homepage') }}"> {{ 'fos.homepage'|trans }} </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {% endblock fos_user_content %}
