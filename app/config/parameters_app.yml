@@ -2,3 +2,4 @@ parameters:
     user_role: CUSTOMER
     user_roles: [CUSTOMER, ADMIN]
     base_domain: http://todo.kazmierski.com.pl
+    admin_mail: marcin@kazmierski.com.pl

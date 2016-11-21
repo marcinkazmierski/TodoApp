@@ -38,9 +38,11 @@ class ContactController extends Controller
                     'message' => $data['message'],
                     'author' => $currentUser->getUsername()
                 );
+
+                $mailAdmin = $this->getParameter('admin_mail');
                 /** @var $serviceMail MailTemplate */
                 $serviceMail = $this->get('mk_mail_engine.class');
-                $serviceMail->sendMailWithTemplate($subject, $params, $currentUser->getEmail(), 'contact');
+                $serviceMail->sendMailWithTemplate($subject, $params, $mailAdmin, 'contact');
                 // TODO:
                 // http://www.lucas.courot.com/how-to-create-a-contact-form-using-symfony2.html
 
