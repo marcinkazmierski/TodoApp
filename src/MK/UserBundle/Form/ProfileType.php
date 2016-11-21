@@ -15,7 +15,7 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('phone', TextType::class, array('label' => "Phone"))
+            ->add('phone', TextType::class, array('label' => "Phone", 'required' => false))
             ->add('locale', ChoiceType::class, array('label' => 'Choose locale', 'choices' => array(
                 'Polish' => 'pl',
                 'English' => 'en',
