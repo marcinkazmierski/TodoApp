@@ -136,6 +136,8 @@ function bindAddNewTask(el) {
     });
 
     AddEditCategory(el);
+
+    sortableTasks();
 }
 
 function hideShowH4(action) {
@@ -234,4 +236,10 @@ function moveFooter() {
     if (footerTop < docHeight) {
         jQuery('footer').css('margin-top', (docHeight - footerTop) + 'px');
     }
+}
+
+function sortableTasks() {
+    $('.sortable').sortable({ handle: ".category-box-name .name" }).bind('sortupdate', function () {
+        console.log('sortable');
+    });
 }
