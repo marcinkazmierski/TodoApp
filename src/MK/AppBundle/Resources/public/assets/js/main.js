@@ -240,23 +240,10 @@ function moveFooter() {
 
 function sortableTasks() {
     $('.sortable').sortable({
-          helper: 'clone',
-          appendTo: 'body',
-        forcePlaceholderSize: true,
-        handle: ".box-wrapper"}).bind('sortupdate', function () {
+        cursor: "move",
+        placeholder: "sortable-placeholder home-category-box",
+        forceHelperSize: true
+    }).bind('sortupdate', function () {
         console.log('sortable');
     });
 }
-
-/**
- start: function(event, ui) {
-        $('.row-fluid > div.span4:visible:first').addClass('real-first-child');
-    },
- stop: function(event, ui) {
-        $('.row-fluid > div.real-first-child').removeClass('real-first-child');
-    },
- change: function(event, ui) {
-        $('.row-fluid > div.real-first-child').removeClass('real-first-child');
-        $('.row-fluid > div.span4:visible:first').addClass('real-first-child');
-    },
- */
