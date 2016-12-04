@@ -1,6 +1,8 @@
 {% for key, category in categories %}
     <div class="col-sm-4 home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
-        {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
+        <div class="box-wrapper">
+            {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
+        </div>
     </div>
 {% endfor %}
 
