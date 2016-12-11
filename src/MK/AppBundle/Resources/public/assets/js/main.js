@@ -34,11 +34,11 @@ function loadTasksBox(el) {
         url: action,
         method: 'GET'
     }).done(function (data) {
+        loaderHide();
         if (data.status == 1) {
             $this.html(data.content);
             bindAddNewTask($this);
         }
-        loaderHide();
     });
     currentCategoryBox = false;
 }
@@ -253,6 +253,7 @@ function sortableTasks() {
         placeholder: "sortable-placeholder home-category-box",
         forceHelperSize: true
     }).bind('sortupdate', function () {
+        loaderShow();
         var order = [];
         var action = jQuery('.home-category-box').attr('data-action-sortable');
         jQuery('.home-category-box').each(function () {
@@ -264,6 +265,7 @@ function sortableTasks() {
             data: {order: order},
             method: 'POST'
         }).done(function (data) {
+            loaderHide();
             if (data.status != 1) {
                 createAlert(data.message, 'danger');
             }

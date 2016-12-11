@@ -104,6 +104,18 @@ h3.category-box-name .glyphicon {
     width: 31.99%;
 }
 
+@media (max-width: 768px) {
+    .home-category-box {
+        width: 48.99%;
+    }
+}
+
+@media (max-width: 560px) {
+    .home-category-box {
+        width: 98.99%;
+    }
+}
+
 .home-category-box .list-group > a {
     display: inline-block;
     width: 100%;
