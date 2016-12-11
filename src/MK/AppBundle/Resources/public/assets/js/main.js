@@ -27,6 +27,7 @@ function loadCategories() {
 
 
 function loadTasksBox(el) {
+    loaderShow();
     var action = jQuery(el).attr('data-action');
     var $this = jQuery(el);
     jQuery.ajax({
@@ -37,6 +38,7 @@ function loadTasksBox(el) {
             $this.html(data.content);
             bindAddNewTask($this);
         }
+        loaderHide();
     });
     currentCategoryBox = false;
 }
@@ -58,11 +60,12 @@ function bindAddNewTask(el) {
         } else {
             hideShowH4('h4-add');
         }
-
+        loaderShow();
         jQuery.ajax({
             url: action,
             method: 'GET'
         }).done(function (data) {
+            loaderHide();
             $this.button('reset');
             if (data.status == 1) {
                 var modal = $('#addNewTask');
@@ -99,10 +102,12 @@ function bindAddNewTask(el) {
     jQuery(el).find('.action-done').click(function () {
         var action = jQuery(this).attr('data-action');
         currentCategoryBox = jQuery(this).parents('.home-category-box');
+        loaderShow();
         jQuery.ajax({
             url: action,
             method: 'POST'
         }).done(function (data) {
+            loaderHide();
             if (data.status == 1) {
                 loadTasksBox(currentCategoryBox);
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
@@ -118,10 +123,12 @@ function bindAddNewTask(el) {
         if (confirm("Are you sure?")) {
             var action = jQuery(this).attr('data-action');
 
+            loaderShow();
             jQuery.ajax({
                 url: action,
                 method: 'POST'
             }).done(function (data) {
+                loaderHide();
                 if (data.status == 1) {
                     createAlert(data.message);
                     loadCategories();
@@ -164,11 +171,12 @@ function AddEditCategory(el) {
         } else {
             hideShowH4('h4-add');
         }
-
+        loaderShow();
         jQuery.ajax({
             url: action,
             method: 'GET'
         }).done(function (data) {
+            loaderHide();
             $this.button('reset');
             if (data.status == 1) {
                 var modal = $('#addNewCategory');
@@ -194,11 +202,12 @@ function contact() {
         var action = jQuery(this).attr('data-action');
         var $this = jQuery(this);
         $this.button('loading');
-
+        loaderShow();
         jQuery.ajax({
             url: action,
             method: 'GET'
         }).done(function (data) {
+            loaderHide();
             $this.button('reset');
             if (data.status == 1) {
                 var modal = $('#contactModal');
@@ -244,17 +253,12 @@ function sortableTasks() {
         placeholder: "sortable-placeholder home-category-box",
         forceHelperSize: true
     }).bind('sortupdate', function () {
-
-
         var order = [];
-
         var action = jQuery('.home-category-box').attr('data-action-sortable');
         jQuery('.home-category-box').each(function () {
             order.push(jQuery(this).attr('data-category-id'));
         });
-
         order = order.join();
-
         jQuery.ajax({
             url: action,
             data: {order: order},
@@ -265,4 +269,13 @@ function sortableTasks() {
             }
         });
     });
+}
+
+function loaderShow() {
+    jQuery('.loader-wrapper').show();
+}
+
+
+function loaderHide() {
+    jQuery('.loader-wrapper').hide();
 }
