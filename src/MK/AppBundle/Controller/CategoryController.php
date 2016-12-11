@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -229,6 +230,40 @@ class CategoryController extends Controller
                 );
             }
         }
+        return new JsonResponse($response);
+    }
+
+    /**
+     * @Route("/position",  name="categories_position")
+     * @Method("POST")
+     */
+    public function saveCategoriesPositionAction(Request $request)
+    {
+        $response = array('status' => 1);
+        $orderCat = $request->get('order');
+        $orderCat = explode(',', $orderCat);
+        if (!empty($orderCat) && is_array($orderCat)) {
+            try {
+                $i = 0;
+                $em = $this->getDoctrine()->getManager();
+                /** @var $repository CategoryTaskRepository */
+                $repository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
+                foreach ($orderCat as $catId) {
+                    $i++;
+                    /** @var $category CategoryTask */
+                    $category = $repository->find($catId);
+                    $category->setPosition($i);
+                    $em->persist($category);
+                    $em->flush();
+                }
+            } catch (Exception $e) {
+                $response = array(
+                    'status' => 0,
+                    'message' => $this->get('translator')->trans('category.position.error'),
+                );
+            }
+        }
+
         return new JsonResponse($response);
     }
 }

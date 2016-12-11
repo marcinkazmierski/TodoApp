@@ -54,6 +54,11 @@ class CategoryTask
     protected $reminder;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $position = 0;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -223,5 +228,21 @@ class CategoryTask
     public function getReminder()
     {
         return $this->reminder;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param integer $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

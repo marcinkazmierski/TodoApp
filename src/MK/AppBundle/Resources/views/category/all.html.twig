@@ -1,5 +1,8 @@
 {% for key, category in categories %}
-    <div class="home-category-box" data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
+    <div class="home-category-box"
+         data-category-id="{{ category.id }}"
+         data-action-sortable="{{ url('categories_position') }}"
+         data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
         <div class="box-wrapper">
             {% include 'MKAppBundle:category/parts:category-box.html.twig' %}
         </div>

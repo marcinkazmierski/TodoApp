@@ -244,6 +244,25 @@ function sortableTasks() {
         placeholder: "sortable-placeholder home-category-box",
         forceHelperSize: true
     }).bind('sortupdate', function () {
-        console.log('sortable');
+
+
+        var order = [];
+
+        var action = jQuery('.home-category-box').attr('data-action-sortable');
+        jQuery('.home-category-box').each(function () {
+            order.push(jQuery(this).attr('data-category-id'));
+        });
+
+        order = order.join();
+
+        jQuery.ajax({
+            url: action,
+            data: {order: order},
+            method: 'POST'
+        }).done(function (data) {
+            if (data.status != 1) {
+                createAlert(data.message, 'danger');
+            }
+        });
     });
 }
