@@ -26,6 +26,10 @@
             {% block body %}{% endblock %}
         </div>
     </div>
+
+    {% block contact_modal %}
+        {% include 'MKAppBundle:_modals:contact.html.twig' %}
+    {% endblock %}
 </div>
 
 <footer class="footer">

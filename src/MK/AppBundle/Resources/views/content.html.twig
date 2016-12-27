@@ -14,9 +14,9 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="{{ path('homepage') }}">TODOapp</a></li>
-                    <li><a href="{{ path('user_profile') }}">Profile</a></li>
-                    <li><a class="contact-modal" href="#" data-action="{{ path('ajax_contact') }}" >Contact</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">TODOapp</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'user_profile' %}active{% endif %}"><a href="{{ path('user_profile') }}">Profile</a></li>
+                    <li><a class="contact-modal" href="#" data-action="{{ path('ajax_contact') }}">Contact</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>
                 </ul>
             </div><!--/.nav-collapse -->
