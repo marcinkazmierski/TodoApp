@@ -16,12 +16,11 @@ class CategoryTaskType extends AbstractType
         $builder
             ->add('name', TextType::class, array('label' => "Category title"))
             ->add('color', ChoiceType::class, array('label' => 'Choose color', 'choices' => array(
-                'Default' => 'default',
-                'Info' => 'info',
-                'Success' => 'success',
-                'Warning' => 'warning',
-                'Danger' => 'danger',
-                'Primary' => 'primary',
+                'Default color' => 'default',
+                'Red color' => 'red',
+                'Green color' => 'green',
+                'Blue color' => 'blue',
+                'Yellow color' => 'yellow',
             )))
             ->add('reminder', CheckboxType::class, array('label' => 'Auto reminder?', 'required' => false));
     }

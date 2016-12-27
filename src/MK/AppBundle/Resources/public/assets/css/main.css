@@ -104,6 +104,22 @@ h3.category-box-name .glyphicon {
     width: 31.99%;
 }
 
+.home-category-box.color-red {
+    background: rgba(200, 35, 35, 0.5);
+}
+
+.home-category-box.color-green {
+    background: rgba(70, 200, 80, 0.5);
+}
+
+.home-category-box.color-blue {
+    background: rgba(50, 100, 165, 0.5);
+}
+
+.home-category-box.color-yellow {
+    background: rgba(214, 214, 34, 0.5);
+}
+
 @media (max-width: 768px) {
     .home-category-box {
         width: 48.99%;
@@ -186,4 +202,9 @@ h3.category-box-name .glyphicon {
     100% {
         transform: rotate(360deg);
     }
+}
+
+/** tasks **/
+.sortable-tasks {
+    min-height: 190px;
 }

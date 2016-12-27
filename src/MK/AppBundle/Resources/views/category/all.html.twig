@@ -1,5 +1,5 @@
 {% for key, category in categories %}
-    <div class="home-category-box"
+    <div class="home-category-box color-{{ category.color }}"
          data-category-id="{{ category.id }}"
          data-action-sortable="{{ url('categories_position') }}"
          data-action="{{ url('show_ajax_category', {'id':category.id}) }}">
