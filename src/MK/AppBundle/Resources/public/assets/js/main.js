@@ -278,10 +278,10 @@ function sortableTasks() {
         });
     });
 
-    $('.sortable-test').sortable({
+    $('.sortable-tasks').sortable({
         cursor: "move",
         forceHelperSize: true,
-        connectWith: '.sortable-test',
+        connectWith: '.sortable-tasks',
     }).bind('sortupdate', function () {
         //
     });
