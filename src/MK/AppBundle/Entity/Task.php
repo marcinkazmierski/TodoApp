@@ -74,6 +74,12 @@ class Task
      */
     protected $user;
 
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $position = 0;
+
     /**
      * Get id
      *
@@ -298,5 +304,21 @@ class Task
     public function getLastSendNotice()
     {
         return $this->lastSendNotice;
+    }
+
+    /**
+     * @return integer
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param integer $position
+     */
+    public function setPosition($position)
+    {
+        $this->position = $position;
     }
 }

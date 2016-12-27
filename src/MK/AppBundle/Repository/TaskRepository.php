@@ -76,7 +76,7 @@ class TaskRepository extends EntityRepository
             ->where('t.status = 1')
             ->andWhere('t.user = :user')
             ->andWhere('t.category = :category')
-            ->orderBy('t.id', 'DESC')
+            ->orderBy('t.position', 'ASC')
             ->setParameter('category', $category)
             ->setParameter('user', $user);
         if ($limit > 0) {

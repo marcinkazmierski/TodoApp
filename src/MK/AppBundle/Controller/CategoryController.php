@@ -3,10 +3,12 @@
 namespace MK\AppBundle\Controller;
 
 use MK\AppBundle\Entity\CategoryTask;
+use MK\AppBundle\Entity\Task;
 use MK\AppBundle\Form\CategoryTaskType;
 use MK\AppBundle\Repository\CategoryTaskRepository;
 use MK\AppBundle\Repository\TaskRepository;
 use MK\AppBundle\Utils\CategoryTaskPermissions;
+use MK\AppBundle\Utils\TaskPermissions;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
@@ -181,9 +183,9 @@ class CategoryController extends Controller
 
         /** @var $taskRepository TaskRepository */
         $taskRepository = $this->getDoctrine()->getRepository('MKAppBundle:Task');
-        $results = $taskRepository->allFromCategory($currentUser, $category, 5);
+        $results = $taskRepository->allFromCategory($currentUser, $category);
 
-        $render = $this->render('MKAppBundle::category/showAjaxTasks.html.twig', array(
+        $render = $this->render('MKAppBundle::category/show-ajax-tasks.html.twig', array(
             'tasks' => $results,
             'category' => $category
         ));
@@ -239,21 +241,55 @@ class CategoryController extends Controller
      */
     public function saveCategoriesPositionAction(Request $request)
     {
+        $tc = new CategoryTaskPermissions();
+        $tp = new TaskPermissions();
+
         $response = array('status' => 1);
         $orderCat = $request->get('order');
+
+
         $orderCat = explode(',', $orderCat);
+
+
         if (!empty($orderCat) && is_array($orderCat)) {
             try {
                 $i = 0;
                 $em = $this->getDoctrine()->getManager();
-                /** @var $repository CategoryTaskRepository */
-                $repository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
-                foreach ($orderCat as $catId) {
-                    $i++;
+                /** @var $repositoryCategory CategoryTaskRepository */
+                $repositoryCategory = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
+
+                /** @var $repositoryCategory TaskRepository */
+                $repositoryTask = $this->getDoctrine()->getRepository('MKAppBundle:Task');
+                foreach ($orderCat as $category) {
+                    preg_match("/(.*?)\[(.*?)\]/", $category, $matches);
+
+                    if (empty($matches[1])) {
+                        continue;
+                    }
+
+                    $catId = (int)$matches[1];
+                    $orderTask = explode(';', $matches[2]);
+                    $j = 0;
+
+                    foreach ($orderTask as $taskId) {
+                        $taskId = (int)$taskId;
+                        /** @var $task Task */
+                        $task = $repositoryTask->find($taskId);
+                        if ($task && $tp->isTaskAuthor($task, $this->getUser())) {
+                            $j++;
+                            $task->setPosition($j);
+                            $em->persist($task);
+                        }
+                    }
+
                     /** @var $category CategoryTask */
-                    $category = $repository->find($catId);
-                    $category->setPosition($i);
-                    $em->persist($category);
+                    $category = $repositoryCategory->find($catId);
+                    if ($category && $tc->isCategoryTaskAuthor($category, $this->getUser())) {
+                        $i++;
+                        $category->setPosition($i);
+                        $em->persist($category);
+                    }
+
                     $em->flush();
                 }
             } catch (Exception $e) {

@@ -257,7 +257,13 @@ function sortableTasks() {
         var order = [];
         var action = jQuery('.home-category-box').attr('data-action-sortable');
         jQuery('.home-category-box').each(function () {
-            order.push(jQuery(this).attr('data-category-id'));
+            var taskOrder = [];
+            jQuery(this).find('.list-group > a').each(function () {
+                taskOrder.push(jQuery(this).attr('data-task-id'));
+            });
+
+            var item = jQuery(this).attr('data-category-id') + '[' + taskOrder.join(';') + ']';
+            order.push(item);
         });
         order = order.join();
         jQuery.ajax({
@@ -270,6 +276,14 @@ function sortableTasks() {
                 createAlert(data.message, 'danger');
             }
         });
+    });
+
+    $('.sortable-test').sortable({
+        cursor: "move",
+        forceHelperSize: true,
+        connectWith: '.sortable-test',
+    }).bind('sortupdate', function () {
+        //
     });
 }
 

@@ -14,11 +14,10 @@
         Dodaj nowe zadanie
     </button>
 </h3>
-<div class="list-group">
-    {% set taskCount = 0 %}
-    {% for key, task in category.tasks if task.status == 1 %}
-        {% set taskCount = taskCount + 1 %}
-        <a href="#" class="list-group-item list-group-item-{{ category.color }}">
+<div class="list-group sortable-test">
+
+    {% for task in mk_app_tasker.allTasksFromCategory(app.user, category.id) if task.status == 1 %}
+        <a href="#" class="list-group-item list-group-item-{{ category.color }}" data-task-id="{{ task.id }}">
             {{ task.title|truncate(25, true) }}
             {% if  task.deadline is not null %}
                 <span class="text-muted small {% if date(task.deadline) < date() %}critical-item{% endif %}">
@@ -33,9 +32,5 @@
                   class="glyphicon glyphicon-ok pull-right action-done"></span>
         </a>
     {% endfor %}
-    {% if taskCount == 0 %}
-        <p class="empty-tasks">
-            Brak zadań...
-        </p>
-    {% endif %}
+
 </div>
