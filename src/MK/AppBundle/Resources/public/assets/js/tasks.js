@@ -2,6 +2,20 @@ jQuery(function () {
 
     /** Task and catgories */
     jQuery('.action-submit').click(function () {
+        var valid = true;
+        jQuery('.modal-body form input.required').each(function () {
+            if (jQuery(this).val() == '') {
+                valid = false;
+                jQuery(this).addClass('input-invalid');
+            } else {
+                jQuery(this).removeClass('input-invalid');
+            }
+        });
+
+        if (!valid) {
+            return false;
+        }
+
         var $this = jQuery(this);
         $this.button('loading');
 

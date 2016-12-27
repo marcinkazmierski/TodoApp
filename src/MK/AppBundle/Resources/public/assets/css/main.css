@@ -208,3 +208,7 @@ h3.category-box-name .glyphicon {
 .sortable-tasks {
     min-height: 190px;
 }
+
+.input-invalid{
+    border: 1px solid red;
+}
