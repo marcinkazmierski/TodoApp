@@ -15,12 +15,12 @@ class ProfileType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('phone', TextType::class, array('label' => "Phone", 'required' => false))
-            ->add('locale', ChoiceType::class, array('label' => 'Choose locale', 'choices' => array(
+            ->add('phone', TextType::class, array('required' => false))
+            ->add('locale', ChoiceType::class, array('choices' => array(
                 'Polish' => 'pl',
                 'English' => 'en',
             )))
-            ->add('save', SubmitType::class, array('label' => 'Save'));
+            ->add('save', SubmitType::class, array('label' => 'form.save'));
     }
 
     public function configureOptions(OptionsResolver $resolver)

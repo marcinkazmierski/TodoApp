@@ -14,7 +14,7 @@
                 {{ form_start(form) }}
                 <div class="row">
                     <div class="col-lg-3">
-                        {{ 'User ID'|trans }}
+                        {{ 'profile.user.id'|trans }}
                     </div>
                     <div class="col-lg-8">
                         {{ user.id }}
@@ -23,7 +23,7 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        {{ 'User username'|trans }}
+                        {{ 'profile.user.name'|trans }}
                     </div>
                     <div class="col-lg-8">
                         {{ user.username }}
@@ -32,7 +32,7 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        {{ 'User e-mail'|trans }}
+                        {{ 'profile.user.mail'|trans }}
                     </div>
                     <div class="col-lg-8">
                         {{ user.email }}
@@ -41,19 +41,19 @@
 
                 <div class="row">
                     <div class="col-lg-3">
-                        {{ 'User phone'|trans }}
+                        {{ 'profile.user.phone'|trans }}
                     </div>
                     <div class="col-lg-8">
-                        {{ form_widget(form.phone, {   'attr': {'class': 'form-control', 'placeholder':'form.user.phone'|trans} }) }}
+                        {{ form_widget(form.phone, {   'attr': {'class': 'form-control'} }) }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-3">
-                        {{ 'User locale'|trans }}
+                        {{ 'profile.user.locale'|trans }}
                     </div>
                     <div class="col-lg-8">
-                        {{ form_widget(form.locale, {   'attr': {'class': 'form-control', 'placeholder':'form.user.locale'|trans} }) }}
+                        {{ form_widget(form.locale, {   'attr': {'class': 'form-control'} }) }}
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@
 
                     </div>
                     <div class="col-lg-8">
-                        {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary', 'placeholder':'form.task.save'|trans} }) }}
+                        {{ form_widget(form.save, {   'attr': {'class': 'btn btn-primary'} }) }}
                     </div>
                 </div>
 

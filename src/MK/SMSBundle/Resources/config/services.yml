@@ -1,7 +1,7 @@
 services:
     mk_sms_engine.class:
         class: MK\SMSBundle\Service\PlusSMSSender
-        arguments: ['@service_container', { address: %sender_address%}]
+        arguments: ['@service_container', { address: "%sender_address%"}]
 
 parameters:
     sender_address: 'sklepflock@gmail.com'

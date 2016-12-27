@@ -28,3 +28,18 @@ ajax:
     task_done: 'Oznaczono zadanie jako wykonane'
 
 task_done: 'Wykonane'
+
+form:
+    save: "Zapisz"
+
+profile:
+    user:
+        id: "ID użytkownika"
+        name: "Nazwa użytkownika"
+        mail: "Adres e-mail użytkownika"
+        phone: "Numer telefonu"
+        locale: "Język serwisu"
+
+
+Polish: "Polski"
+English: "Anglieski"
