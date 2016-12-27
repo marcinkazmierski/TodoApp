@@ -268,26 +268,27 @@ class CategoryController extends Controller
                     }
 
                     $catId = (int)$matches[1];
-                    $orderTask = explode(';', $matches[2]);
-                    $j = 0;
-
-                    foreach ($orderTask as $taskId) {
-                        $taskId = (int)$taskId;
-                        /** @var $task Task */
-                        $task = $repositoryTask->find($taskId);
-                        if ($task && $tp->isTaskAuthor($task, $this->getUser())) {
-                            $j++;
-                            $task->setPosition($j);
-                            $em->persist($task);
-                        }
-                    }
-
                     /** @var $category CategoryTask */
                     $category = $repositoryCategory->find($catId);
                     if ($category && $tc->isCategoryTaskAuthor($category, $this->getUser())) {
                         $i++;
                         $category->setPosition($i);
                         $em->persist($category);
+
+                        $orderTask = explode(';', $matches[2]);
+                        $j = 0;
+
+                        foreach ($orderTask as $taskId) {
+                            $taskId = (int)$taskId;
+                            /** @var $task Task */
+                            $task = $repositoryTask->find($taskId);
+                            if ($task && $tp->isTaskAuthor($task, $this->getUser())) {
+                                $j++;
+                                $task->setPosition($j);
+                                $task->setCategory($category);
+                                $em->persist($task);
+                            }
+                        }
                     }
 
                     $em->flush();
