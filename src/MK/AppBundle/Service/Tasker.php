@@ -103,7 +103,7 @@ class Tasker
 
     public function allTasksFromCategory(User $user, $categoryId)
     {
-        $category = $this->entityManager->getRepository('MKAppBundle:CategoryTask')->findOneById($categoryId);
+        $category = $this->entityManager->getRepository('MKAppBundle:CategoryTask')->find($categoryId);
         $results = $this->entityManager->getRepository('MKAppBundle:Task')->allFromCategory($user, $category);
         return $results;
     }
