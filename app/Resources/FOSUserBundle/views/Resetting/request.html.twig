@@ -1,0 +1,31 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/mkapp/assets/css/login.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body_classes_names %}login-page{% endblock %}
+
+{% block fos_user_content %}
+    {% if invalid_username is defined %}
+        <div class="form-error">
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                {{ 'security.resetting.invalid_username: %username%'|trans({'%username%': invalid_username}) }}
+            </div>
+        </div>
+    {% endif %}
+
+    <form action="{{ path("fos_user_resetting_send_email") }}" method="post" role="form" class="form-signin">
+        <fieldset>
+            <div class="form-group">
+                <input type="text" id="username" class="form-control" name="username" required="required"
+                       placeholder="{{ 'security.resetting.login_or_mail'|trans }}" autofocus/>
+            </div>
+            <input type="submit" id="_submit" class="btn btn-lg btn-success btn-block" name="_submit"
+                   value="{{ 'security.resetting.send'|trans }}"/>
+        </fieldset>
+    </form>
+
+{% endblock fos_user_content %}

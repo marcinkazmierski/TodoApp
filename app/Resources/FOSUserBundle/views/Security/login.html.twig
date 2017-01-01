@@ -7,7 +7,7 @@
 {% block body_classes_names %}login-page{% endblock %}
 
 {% block fos_user_content %}
-    {% if error %}
+    {% if error is defined and error %}
         <div class="form-error">
             <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -38,11 +38,15 @@
                 {{ 'security.login.remember_me'|trans }}
             </label>
         </div>
-        <div class="">
+        <p>
             <a href="{{ path('fos_user_registration_register') }}">
                 {{ 'security.login.register_text'|trans }}
             </a>
-        </div>
+            <br/>
+            <a href="{{ path('fos_user_resetting_request') }}">
+                {{ 'security.login.reset_text'|trans }}
+            </a>
+        </p>
         <button name="_submit" class="btn btn-lg btn-primary btn-block" type="submit">
             {{ 'security.login.log_in'|trans }}
         </button>

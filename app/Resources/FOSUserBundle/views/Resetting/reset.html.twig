@@ -1,0 +1,35 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% block stylesheets %}
+    <link href="{{ asset('bundles/mkapp/assets/css/login.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body_classes_names %}login-page{% endblock %}
+
+{% block fos_user_content %}
+
+    {% for child in form.plainPassword %}
+        {% for error in child.vars.errors %}
+            <div class="form-error">
+                <div class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    {{ error.message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(form, { 'action': path('fos_user_resetting_reset', {'token': token}), 'attr': { 'class': 'form-signin' } }) }}
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.first, {   'attr': {'class': 'form-control required', 'placeholder':'security.resetting.password.first'|trans} }) }}
+    </div>
+    <div class="form-group">
+        {{ form_widget(form.plainPassword.second, {   'attr': {'class': 'form-control required', 'placeholder':'security.resetting.password.second'|trans} }) }}
+    </div>
+    <button name="_submit" class="btn btn-lg btn-success btn-block" type="submit">
+        {{ 'security.resetting.submit'|trans }}
+    </button>
+    {{ form_end(form) }}
+
+{% endblock fos_user_content %}
