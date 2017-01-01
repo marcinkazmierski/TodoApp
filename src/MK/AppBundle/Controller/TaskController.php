@@ -114,7 +114,9 @@ class TaskController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var $task Task */
             $task = $form->getData();
-            $task->setDeadline(new \DateTime($task->getDeadline()));
+            if ($task->getDeadline()) {
+                $task->setDeadline(new \DateTime($task->getDeadline()));
+            }
             $validator = $this->get('validator');
             $errors = $validator->validate($task);
             if (count($errors) === 0) {
