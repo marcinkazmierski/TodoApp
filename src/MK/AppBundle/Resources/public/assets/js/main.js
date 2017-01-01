@@ -71,7 +71,9 @@ function bindAddNewTask(el) {
                 var modal = $('#addNewTask');
                 var content = data.content;
                 jQuery(modal).find('.modal-body').html(content);
-                jQuery(modal).find('.modal-body').find('.field-category-id').val(category);
+                if ($this.hasClass('add-new-task')) {
+                    jQuery(modal).find('.modal-body').find('.field-category-id').val(category);
+                }
                 jQuery(modal).find('.action-submit').attr('data-action', action);
                 jQuery(modal).modal('show');
 
@@ -284,6 +286,7 @@ function sortableTasks() {
         connectWith: '.sortable-tasks',
     }).bind('sortupdate', function () {
         //
+
     });
 }
 
