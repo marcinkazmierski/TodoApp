@@ -106,7 +106,7 @@ class TaskRepository extends EntityRepository
         $queryBuilder->select('t')
             ->from('MKAppBundle:Task', 't')
             ->leftJoin('t.category', 'c')
-            ->where('t.status > 0')
+            ->where('t.status = 1')
             ->andWhere('c.reminder = true')
             ->andWhere('t.deadline <= :deadline')
             ->andWhere('t.lastSendNotice <= :yesterday OR t.lastSendNotice is NULL')
