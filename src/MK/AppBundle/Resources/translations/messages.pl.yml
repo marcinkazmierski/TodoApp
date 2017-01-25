@@ -26,11 +26,22 @@ views:
 
 ajax:
     task_done: 'Oznaczono zadanie jako wykonane'
+    category_delete_have_tasks: 'Nie można usunąć kategorii, która zawiera zadania. Usuń w pierwszej kolejności wszystkie zadania z tej kategorii.'
+    category_delete_done: 'Kategoria zostąła usunięta'
 
 task_done: 'Wykonane'
 
 form:
     save: "Zapisz"
+    task:
+        title: 'Tytuł zadania'
+        deadline: 'Termin zadania'
+    buttons:
+        close: 'Zamknij'
+        save: 'Zapisz'
+        send: 'Wyślij'
+    contact:
+        subject: 'Temat wiadomości'
 
 profile:
     user:
