@@ -17,6 +17,10 @@
         </div>
     {% endif %}
 
+    <p class="text-center">
+        {{ 'security.resetting.intro'|trans }}
+    </p>
+
     <form action="{{ path("fos_user_resetting_send_email") }}" method="post" role="form" class="form-signin">
         <fieldset>
             <div class="form-group">

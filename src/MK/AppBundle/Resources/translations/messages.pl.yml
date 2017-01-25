@@ -5,6 +5,12 @@ security:
         remember_me: 'Zapamiętaj mnie'
         log_in: 'Zaloguj się'
         register_text: 'Nie masz konta? Zarejestruj się!'
+        reset_text: 'Zapomniałeś hasła?'
+    resetting:
+        login_or_mail: 'Podaj login lub email do swojego konta'
+        send: 'Wyślij link do resetowania hasła'
+        intro: 'Formularz resetownaia hasła do konta.'
+        "invalid_username: %username%": 'Niepoprawny login lub mail: %username%'
 
 views:
     add_new_task: 'Dodaj nowe zadanie'
