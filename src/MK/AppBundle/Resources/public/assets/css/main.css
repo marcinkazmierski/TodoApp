@@ -103,6 +103,7 @@ h3.category-box-name .glyphicon {
     float: left;
     width: 31.99%;
     touch-action: auto;
+    box-shadow: 2px 2px 10px #777;
 }
 
 .home-category-box.color-red {
