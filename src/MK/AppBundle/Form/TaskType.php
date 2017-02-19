@@ -23,15 +23,14 @@ class TaskType extends AbstractType
     {
         $this->user = $options['user'];
         $builder
-            ->add('title', TextType::class, array('label' => "Task title"))
-            ->add('description', TextareaType::class, array('required' => false))
-            ->add('deadline', TextType::class, array('required' => false))
+            ->add('title', TextType::class, array('label' => "form.task.title"))
+            ->add('description', TextareaType::class, array('required' => false, 'label' => "form.task.description"))
+            ->add('deadline', TextType::class, array('required' => false, 'label' => "form.task.deadline"))
             ->add('category', EntityType::class, array(
                 'class' => CategoryTask::class,
                 'query_builder' => function (EntityRepository $er) {
                     return $er->queryAllBuilder($this->user);
                 },
-                'placeholder' => 'Choose an option',
                 'choice_label' => 'name',
             ));
     }
@@ -43,5 +42,4 @@ class TaskType extends AbstractType
             'user' => 'MK\UserBundle\Entity\User'
         ));
     }
-
 }

@@ -1,6 +1,5 @@
 body.login-page {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding: 0;
     background-color: #eee;
 }
 

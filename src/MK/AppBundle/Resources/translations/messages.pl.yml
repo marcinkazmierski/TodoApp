@@ -42,6 +42,7 @@ form:
     task:
         title: 'Tytuł zadania'
         deadline: 'Termin zadania'
+        description: 'Opis zadania'
     buttons:
         close: 'Zamknij'
         save: 'Zapisz'
@@ -60,3 +61,16 @@ profile:
 
 Polish: "Polski"
 English: "Anglieski"
+
+html:
+    content:
+        todoapp: "TODOapp"
+        profile: "Profil"
+        logout: "Wyloguj"
+        contact: "Kontakt z Administratorem"
+    new_task:
+        edit_task: "Edytuj zadanie"
+        add_task: "Dodaj nowe zadanie"
+    new_category:
+        add_category: "Dodaj nową kategorię"
+        edit_category: "Edytuj kategorię"
