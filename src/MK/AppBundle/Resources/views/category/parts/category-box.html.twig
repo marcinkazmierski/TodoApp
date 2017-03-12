@@ -11,7 +11,7 @@
     <button type="button" class="btn btn-default pull-right btn-xs add-new-task"
             data-loading-text="<i class='glyphicon glyphicon-refresh'></i> Processing"
             data-action="{{ url('new_task') }}" data-category="{{ category.id }}">
-        <i class="glyphicon glyphicon-plus"></i> zadanie
+        <i class="glyphicon glyphicon-plus"></i> {{ 'views.box.task'|trans }}
     </button>
 </h3>
 <div class="list-group sortable-tasks">
