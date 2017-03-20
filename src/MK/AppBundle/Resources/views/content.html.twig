@@ -17,6 +17,7 @@
                     <li class="{% if app.request.attributes.get('_route') == 'homepage' %}active{% endif %}"><a href="{{ path('homepage') }}">{{ 'html.content.todoapp'|trans }}</a></li>
                     <li class="{% if app.request.attributes.get('_route') == 'user_profile' %}active{% endif %}"><a href="{{ path('user_profile') }}">{{ 'html.content.profile'|trans }}</a></li>
                     <li><a class="contact-modal" href="#" data-action="{{ path('ajax_contact') }}">{{ 'html.content.contact'|trans }}</a></li>
+                    <li class="{% if app.request.attributes.get('_route') == 'archive_tasks' %}active{% endif %}"><a href="{{ path('archive_tasks') }}">{{ 'html.content.archive'|trans }}</a></li>
                     <li><a href="{{ path('fos_user_security_logout') }}">{{ 'html.content.logout'|trans }}</a></li>
                 </ul>
             </div><!--/.nav-collapse -->

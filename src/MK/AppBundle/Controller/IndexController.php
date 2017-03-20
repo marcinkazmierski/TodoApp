@@ -21,13 +21,7 @@ class IndexController extends Controller
     {
         // $locale = $request->getLocale();
         // dump($locale);
-        $currentUser = $this->getUser();
-        /** @var $categoryTaskRepository CategoryTaskRepository */
-        $categoryTaskRepository = $this->getDoctrine()->getRepository('MKAppBundle:CategoryTask');
-        $categories = $categoryTaskRepository->queryAll($currentUser);
-
-        return $this->render('MKAppBundle::index/index.html.twig', array(
-            'categories' => $categories
-        ));
+        // $currentUser = $this->getUser();
+        return $this->render('MKAppBundle::index/index.html.twig');
     }
 }

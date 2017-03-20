@@ -1,6 +1,7 @@
 <?php
 namespace MK\AppBundle\Controller;
 
+use MK\AppBundle\Repository\TaskRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,6 +16,13 @@ class ArchiveController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('MKAppBundle::archive/index.html.twig');
+        /** @var $taskRepository TaskRepository */
+        $taskRepository = $this->getDoctrine()->getRepository('MKAppBundle:Task');
+
+        $doneTasks = $taskRepository->getAllDone();
+
+        return $this->render('MKAppBundle::archive/index.html.twig',
+            ['tasks' => $doneTasks]
+        );
     }
 }

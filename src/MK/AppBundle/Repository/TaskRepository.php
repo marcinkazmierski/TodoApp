@@ -116,4 +116,14 @@ class TaskRepository extends EntityRepository
         $results = $queryBuilder->getQuery()->getResult();
         return $results;
     }
+
+    public function getAllDone(){
+        $queryBuilder = $this->getEntityManager()->createQueryBuilder();
+        $queryBuilder->select('t')
+            ->from('MKAppBundle:Task', 't')
+            ->where('t.status = 2')
+            ->orderBy('t.doneDate', 'DESC');
+        $results = $queryBuilder->getQuery()->getResult();
+        return $results;
+    }
 }
