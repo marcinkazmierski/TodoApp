@@ -1,7 +1,7 @@
 {% extends 'MKAppBundle::content.html.twig' %}
 
 {% block content %}
-    <div class="row user-profile-wrapper bg-white">
+    <div class="row archive-task-list bg-white">
         <div class="col-sm-12">
             <p>
                 {{ 'views.archive_page'|trans }}
@@ -10,18 +10,32 @@
             {% for task in tasks %}
                 <a href="#" class="list-group-item" data-task-id="{{ task.id }}">
                     {{ task.title|truncate(25, true) }}
-
-                        <span class="text-muted small">
+                    &nbsp;
+                    <span class="text-muted small label label-success">
                     <em>
                            {{ task.doneDate|date('Y-m-d H:i:s') }}
                     </em>
-                </span>
-                    <span data-action="{{ path('edit_task', {'id':task.id}) }}"
+                    </span>
+                    &nbsp;
+                    <span class="text-muted small label label-info">
+                    <em>
+                           {{ task.category.name }}
+                    </em>
+                    </span>
+
+                    <span data-action="{{ path('edit_task', {'id':task.id}) }}" data-category="{{ task.category.id }}"
                           class="glyphicon glyphicon-pencil pull-right edit-task">
                     </span>
                 </a>
             {% endfor %}
         </div>
     </div>
+
+    <!-- Modals -->
+    {% include 'MKAppBundle:_modals:new-task.html.twig' %}
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('bundles/mkapp/assets/js/tasks.js') }}"></script>
+{% endblock %}

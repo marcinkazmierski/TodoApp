@@ -2,6 +2,9 @@ jQuery(function () {
     AddEditCategory('.index-main-wrapper');
     contact();
     moveFooter();
+
+    bindAddNewTask('.archive-task-list');
+
 });
 
 jQuery(window).resize(function () {

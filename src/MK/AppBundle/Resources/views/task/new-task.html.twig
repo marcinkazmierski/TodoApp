@@ -17,6 +17,16 @@
         </div>
     </div>
 </div>
-<input type="hidden" class="field-category-id" name="{{ form.category.vars.full_name }}" value="{{ form.category.vars.value }}">
-{% do form.category.setRendered %}
+<input type="hidden" class="field-category-id" name="{{ form.category.vars.full_name }}"
+       value="{{ form.category.vars.value }}">
+
+{% if showCategoryInput is defined and showCategoryInput == true %}
+    <div class="form-group">
+        {{ form_label(form.category) }}
+        {{ form_widget(form.category, {   'attr': {'class': 'form-control', 'placeholder':'form.task.category'|trans} }) }}
+    </div>
+{% else %}
+    {% do form.category.setRendered %}
+{% endif %}
+
 {{ form_end(form) }}

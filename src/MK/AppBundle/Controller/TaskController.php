@@ -151,9 +151,10 @@ class TaskController extends Controller
             }
             return new JsonResponse($response);
         }
-        $render = $this->render('MKAppBundle::task/new-task.html.twig', array(
+        $render = $this->render('MKAppBundle::task/new-task.html.twig', [
             'form' => $form->createView(),
-        ));
+            'showCategoryInput' => ($task->getStatus() === 2)
+        ]);
 
         $response = array(
             'message' => '',
