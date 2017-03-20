@@ -214,3 +214,7 @@ h3.category-box-name .glyphicon {
 .input-invalid{
     border: 1px solid red;
 }
+
+.archive-task-list{
+    padding: 5px;
+}

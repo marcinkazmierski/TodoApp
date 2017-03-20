@@ -3,7 +3,7 @@ jQuery(function () {
     contact();
     moveFooter();
 
-    bindAddNewTask('.archive-task-list');
+    loadArchiveTasks();
 
 });
 
@@ -28,11 +28,20 @@ function loadCategories() {
     loadTasksBox('.home-categories');
 }
 
+function loadArchiveTasks() {
+    loadTasksBox('.archive-task-list-rows');
+}
 
 function loadTasksBox(el) {
     loaderShow();
     var action = jQuery(el).attr('data-action');
     var $this = jQuery(el);
+
+    if (action == undefined) {
+        loaderHide();
+        return false;
+    }
+
     jQuery.ajax({
         url: action,
         method: 'GET'

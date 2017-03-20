@@ -35,6 +35,7 @@ jQuery(function () {
                 } else {
                     loadTasksBox(currentCategoryBox);
                 }
+                loadArchiveTasks();
             } else if (data.status == 0 && typeof data.message !== 'undefined') {
                 createAlert(data.message, 'danger');
             } else {

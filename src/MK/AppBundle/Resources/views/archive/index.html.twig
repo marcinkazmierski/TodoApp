@@ -7,27 +7,12 @@
                 {{ 'views.archive_page'|trans }}
             </p>
 
-            {% for task in tasks %}
-                <a href="#" class="list-group-item" data-task-id="{{ task.id }}">
-                    {{ task.title|truncate(25, true) }}
-                    &nbsp;
-                    <span class="text-muted small label label-success">
-                    <em>
-                           {{ task.doneDate|date('Y-m-d H:i:s') }}
-                    </em>
-                    </span>
-                    &nbsp;
-                    <span class="text-muted small label label-info">
-                    <em>
-                           {{ task.category.name }}
-                    </em>
-                    </span>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div data-action="{{ url('all_archive_tasks') }}" class="row archive-task-list-rows"></div>
+                </div>
+            </div>
 
-                    <span data-action="{{ path('edit_task', {'id':task.id}) }}" data-category="{{ task.category.id }}"
-                          class="glyphicon glyphicon-pencil pull-right edit-task">
-                    </span>
-                </a>
-            {% endfor %}
         </div>
     </div>
 
